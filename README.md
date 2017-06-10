@@ -1,2 +1,2 @@
-# anetzwerk
+# Asoziales Netzwerk
 Das Asoziale Netzwerk!
