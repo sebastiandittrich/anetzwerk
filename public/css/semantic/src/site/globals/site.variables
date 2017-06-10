@@ -1,0 +1,9 @@
+/*******************************
+     User Global Variables
+*******************************/
+
+@invertedAttachedBackground : @blue;
+
+@blue                       : #3F48CC;
+@violet                     : #2D3391;
+@grey                       : #e6e6e6;
