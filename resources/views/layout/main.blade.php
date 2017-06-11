@@ -1,7 +1,9 @@
 <html>
     <head>
         <link rel="stylesheet" href='{{asset('css/semantic/dist/semantic.min.css')}}' />
+        <link rel="stylesheet" href='{{asset('css/main.css')}}' />
         <script src='{{asset('js/jquery.js')}}'></script>
+        <script src='{{asset('js/menu.js')}}'></script>
         <script src='{{asset('js/header.js')}}'></script>
         <script src='{{asset('css/semantic/dist/semantic.min.js')}}'></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -9,10 +11,13 @@
 
     <body class='pushable'>
         <div class="pusher">
-            <div class="ui blue tabular inverted vertical masthead center aligned segment">
-                <div class="ui container">
-                    <h1 class='ui inverted header'><img src="{{asset('pictures/logo-home.png')}}" /> Asoziales Netzwerk</h1>
-                    <div class="ui large inverted secondary pointing menu" style="border-left: none; border-top: none; border-right: none;">
+            <div class="ui blue tabular inverted vertical masthead segment">
+                <div class="ui center aligned container">
+                    <div class="ui left aligned container">
+                        <span class='ui large inverted header' id="pageheader"><img src="{{asset('pictures/logo-home.png')}}" /> Asoziales Netzwerk</span>
+                        <button class="ui right floated blue button" id="pagemenubutton"><i class="sidebar icon"></i>Menu</button>
+                    </div>
+                    <div class="ui large stackable inverted secondary pointing menu" style="border-left: none; border-top: none; border-right: none;" id="menu">
                         <a id='home' href="/" class="active item">Home</a>
                         <a id='posts' href="/posts" class="item">Posts</a>
                         <a href="/users" id="user" class="item">Benutzer</a>
