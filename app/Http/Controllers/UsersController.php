@@ -30,4 +30,27 @@ class UsersController extends Controller
 
         return redirect('/users');
     }
+
+    public function edit(User $user)
+    {
+        return view('user.edit', compact('user'));
+    }
+
+    public function update(User $user)
+    {
+        $this->validate(request(), [
+            'email' => 'required|string|max:255'
+        ]);
+
+        $user->email = request('email');
+
+        if(request('first_name')) {
+            $user->first_name = request('first_name');
+        }
+        if(request('last_name')) {
+            $user->last_name = request('last_name');
+        }
+
+        $user->save();
+    }
 }

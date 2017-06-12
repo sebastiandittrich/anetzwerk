@@ -16,10 +16,10 @@
                         <i class="log out icon"></i>
                         Abmelden
                     </a>
-                    <div href='/users/{{$user->id}}/edit' class="ui blue right labeled icon button">
+                    <a href='/users/{{$user->id}}/edit' class="ui blue right labeled icon button">
                         <i class="edit icon"></i>
                         Profil bearbeiten
-                    </div>
+                    </a>
                 </div>
             </div>
         @endif

@@ -30,7 +30,7 @@
                 <textarea name="content" placeholder="Inhalt eingeben">{{$post->content}}</textarea>
             </div>
         {{csrf_field()}}
-        <input type="submit" class="ui positive left aligned button" value='Änderungen speichern'>
+        <button type="submit" class="ui positive labeled icon left aligned button"><i class="save icon"></i>Änderungen speichern</button>
     </form>
 
 @endsection

@@ -46,3 +46,5 @@ Route::get('/tags/{tag}', 'TagsController@show');
 Route::get('/users', 'UsersController@showall');
 Route::get('/users/{user}', 'UsersController@showsingle');
 Route::get('/users/{user}/delete', 'UsersController@delete');
+Route::get('/users/{user}/edit', 'UsersController@edit');
+Route::post('/users/{user}/edit', 'UsersController@update');
