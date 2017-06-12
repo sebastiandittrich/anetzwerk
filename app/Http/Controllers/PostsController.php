@@ -61,4 +61,26 @@ class PostsController extends Controller
         $post->removeAll();
         return redirect('/posts');
     }
+
+    public function edit(Post $post)
+    {
+        return view('post.edit', compact('post'));
+    }
+
+    public function update(Post $post) {
+        $this->validate(request(), [
+            'header' => 'string|required|max:255'
+        ]);
+
+        if(request('content')) {
+            $post->content = request("content");
+        } else {
+            $post->content = "";
+        }
+
+        $post->header = request('header');
+        $post->save();
+
+        return redirect('/posts/'.$post->id.'/details');
+    }
 }

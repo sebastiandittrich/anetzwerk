@@ -30,6 +30,8 @@ Route::get('/posts/{post}/details', 'PostsController@show');
 Route::get('/posts/new', 'PostsController@create');
 Route::post('/posts/new', 'PostsController@store');
 Route::get('/posts/{post}/delete', 'PostsController@delete');
+Route::get('/posts/{post}/edit', 'PostsController@edit');
+Route::post('/posts/{post}/edit', 'PostsController@update');
 
 // Comments
 Route::post('/posts/{post}/comments/new', 'CommentsController@store');
