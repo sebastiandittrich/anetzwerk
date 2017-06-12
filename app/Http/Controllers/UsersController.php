@@ -52,5 +52,7 @@ class UsersController extends Controller
         }
 
         $user->save();
+
+        return redirect('/users/'.$user->id);
     }
 }
