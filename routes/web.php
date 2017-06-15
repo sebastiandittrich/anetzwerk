@@ -48,3 +48,9 @@ Route::get('/users/{user}', 'UsersController@showsingle');
 Route::get('/users/{user}/delete', 'UsersController@delete');
 Route::get('/users/{user}/edit', 'UsersController@edit');
 Route::post('/users/{user}/edit', 'UsersController@update');
+
+// Zitate
+Route::get('/quotes', 'QuotesController@all');
+Route::get('/quotes/{quote}/details', 'QuotesController@show');
+Route::get('/quotes/new', 'QuotesController@create');
+Route::post('/quotes/new', 'QuotesController@store');

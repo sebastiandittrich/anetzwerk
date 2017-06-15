@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class);
+    }
+
     public function shit(Post $post) {
         if(count(Shit::where('user_id', auth()->id())->where('post_id', $post->id)->get())) {
             return true;

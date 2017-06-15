@@ -1,6 +1,7 @@
 @extends('layout.main')
 
 @section('header')
+    <h2 class='ui left aligned inverted header'>Alle Posts</h2>
     <script>setNav('posts')</script>
     <script src='{{asset('js/posts.js')}}'></script>
 @endsection
@@ -8,17 +9,16 @@
 @section('content')
     {{csrf_field()}}
     <div class='ui segment'>
-        <h4 class="ui horizontal divider header">Optionen</h4>
-        
-        
-        <div class="ui vertical buttons">
-            <button class="ui labeled icon button"><i class="filter icon"></i>Filtern</button>
+    <h4 class="ui horizontal divider header">Optionen</h4>
+        <div class='responsive-buttons'>
+            <button class="ui labeled icon button"><i class="filter icon"></i>Filtern</button><br class="responsive">
             <button class="ui labeled icon button"><i class="sort icon"></i>Ordnen nach: Datum</button>
-        </div>
+            
 
-        @if(Auth::check())
-            <a href='/posts/new' class="ui right floated labeled icon button"><i class="add icon"></i>Neuen Post schreiben</a>
-        @endif
+            @if(Auth::check())
+                <br class="responsive"><a href="/posts/new" class="ui blue right floated labeled icon button"><i class="add icon"></i>Neuer Post</a>
+            @endif
+        </div>
         
     </div>
     <h4 class='ui horizontal divider header'>Alle Posts</h4>
