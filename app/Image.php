@@ -10,6 +10,11 @@ class Image extends Model
 
     public static $supportedExtensions = ['png', 'gif', 'jpeg', 'bmp', 'xpm', 'wbmp', 'webp', 'xbm'];
 
+    public function track(string $action) {
+        Activity::store($action, self::class, $this->id);
+    }
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -34,6 +39,10 @@ class Image extends Model
 
     public function getImageName() {
         return substr($this->path, 3);
+    }
+
+    public function getURL() {
+        return asset('storage/images/'.$this->path);
     }
 
     public function removeAll()

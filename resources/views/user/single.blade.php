@@ -4,9 +4,28 @@
     <h2 class='ui left aligned header inverted'>Details</h2>
     <script>setNav('user')</script>
     <script src='{{asset('js/posts.js')}}'></script>
+    <script src='{{asset('js/user.js')}}'></script>
 @endsection
 
 @section('content')
+    {{csrf_field()}}
+    <div class="ui two column stackable grid">
+        <div class="column">
+                <img src="{{$user->profileimage()->getURL()}}" alt="" class="ui rounded large image profile-image">
+        </div>
+        <div class="column">
+            <div class="ui huge top attached header">Das ist {{$user->username}}</div>
+            <div class="ui bottom attached segment">
+                <div class="ui header">Letzte Aktivitäten</div>
+                <div class="ui feed">
+                    @foreach($user->activities(3) as $activity)
+                        @include('activity.overview')
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
     @if(Auth::user())
         @if(Auth::user()->id == $user->id)
             <div class="ui segment">

@@ -1,5 +1,10 @@
 <?php
     return [
+        'icons' => [
+            'create' => 'blue add',
+            'update' => 'orange refresh',
+            'delete' => 'red erase',
+        ],
         'App\\Post' => [
             'create' => 'hat einen Post veröffentlicht',
             'delete' => 'hat einen Post gelöscht',

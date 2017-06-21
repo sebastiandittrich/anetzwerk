@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Shit;
+use App\Image;
 
 class User extends Authenticatable
 {
@@ -20,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password', 'first_name', 'last_name'
+        'username', 'image', 'email', 'password', 'first_name', 'last_name'
     ];
 
     /**
@@ -70,10 +71,22 @@ class User extends Authenticatable
     }
 
     public function shit(Post $post) {
-        if(count(Shit::where('user_id', auth()->id())->where('post_id', $post->id)->get())) {
+        if(count(Shit::where('user_id', auth()->id())->where('object', 'App\\Post')->where('object_id', $post->id)->get())) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public function activities(int $limit) {
+        $activities = Activity::where('user_id', $this->id)->limit($limit)->get();
+        foreach ($activities as $activity) {
+            $activity->prepare();
+        }
+        return $activities;
+    }
+
+    public function profileimage() {
+        return Image::find($this->image_id);
     }
 }

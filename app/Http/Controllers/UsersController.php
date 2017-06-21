@@ -45,6 +45,12 @@ class UsersController extends Controller
 
         $user->email = request('email');
 
+        if(request('image_id')) {
+            if(request('image_id') != $user->image_id) {
+                $user->image_id = request('image_id');
+            }
+        }
+
         if(request('first_name')) {
             $user->first_name = request('first_name');
         }

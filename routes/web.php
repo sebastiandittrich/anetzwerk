@@ -55,3 +55,6 @@ Route::get('/quotes', 'QuotesController@all');
 Route::get('/quotes/{quote}/details', 'QuotesController@show');
 Route::get('/quotes/new', 'QuotesController@create');
 Route::post('/quotes/new', 'QuotesController@store');
+
+// Aktivitäten
+Route::get('/activities', 'ActivitiesController@showall');
