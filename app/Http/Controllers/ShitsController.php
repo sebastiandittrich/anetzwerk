@@ -12,13 +12,14 @@ class ShitsController extends Controller
     {
         $found = Shit::where('user_id', auth()->id())->where('post_id', $post->id)->first();
         if(count($found)) {
+            $found->track('delete');
             $found->delete();
             echo "false";
         } else {
             Shit::create([
                 'post_id' => $post->id,
                 'user_id' => auth()->id()
-            ]);
+            ])->track('create');
 
             echo "true";
         }

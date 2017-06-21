@@ -12,6 +12,7 @@
 */
 
 Carbon\Carbon::setLocale('de');
+App::setLocale('de');
 
 // Home
 Route::get('/', 'HomeController@home')->name('home');

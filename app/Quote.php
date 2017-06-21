@@ -9,6 +9,10 @@ class Quote extends Model
 {
     protected $fillable = ['content', 'real_author', 'fake_author', 'user_id'];
 
+    public function track(string $action) {
+        Activity::store($action, self::class, $this->id);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -11,6 +11,10 @@ class Post extends Model
 {
     protected $fillable = ['header', 'content', 'user_id'];
 
+    public function track(string $action) {
+        Activity::store($action, self::class, $this->id);
+    }
+
     public function checkOwner(User $user = null)
     {
         if($user == null) {

@@ -10,6 +10,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function track(string $action) {
+        Activity::store($action, self::class, $this->id);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

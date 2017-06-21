@@ -26,12 +26,12 @@ class QuotesController extends Controller
             'real_author' => 'required|string|max:255'
         ]);
 
-        $quote = Quote::create([
+       Quote::create([
             'user_id' => auth()->id(),
             'content' => request('quote'),
             'fake_author' => request('fake_author'),
             'real_author' => request('real_author')
-        ]);
+        ])->track('create');
 
         return redirect('/quotes');
     }

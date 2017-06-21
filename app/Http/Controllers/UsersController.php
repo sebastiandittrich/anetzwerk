@@ -26,6 +26,7 @@ class UsersController extends Controller
         foreach ($user->posts as $post) {
             $post->removeAll();
         }
+        User::find($user->id)->track('delete');
         User::find($user->id)->delete();
 
         return redirect('/users');
@@ -50,6 +51,8 @@ class UsersController extends Controller
         if(request('last_name')) {
             $user->last_name = request('last_name');
         }
+
+        $user->track('update');
 
         $user->save();
 
