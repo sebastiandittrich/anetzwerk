@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\Shit;
 
 class Post extends Model
 {
     protected $fillable = ['header', 'content', 'user_id'];
+
+    public function track(string $action) {
+        Activity::store($action, self::class, $this->id);
+    }
 
     public function checkOwner(User $user = null)
     {
@@ -34,11 +39,6 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function shits()
-    {
-        return $this->hasMany(Shit::class);
-    }
-
     public function images()
     {
         return $this->hasMany(Image::class);
@@ -47,6 +47,11 @@ class Post extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function shits()
+    {
+        return Shit::where('object', 'App\\Post')->where('object_id', $this->id)->get();
     }
 
     public function saveTag(string $tagname)
@@ -65,7 +70,9 @@ class Post extends Model
     }
     
     public function removeAll() {
-        $this->shits()->delete();
+        foreach($this->shits() as $shit) {
+            $shit->delete();
+        }
         $this->comments()->delete();
         foreach ($this->images as $image) {
             $image->removeAll();
@@ -87,6 +94,8 @@ class Post extends Model
             'user_id' => auth()->id(),
             'path' => $path
         ]);
+
+        $savedimage->track('create');
 
         try {
             if(!is_dir(Image::getImagePath().substr($savedimage->path, 0, 2))) {

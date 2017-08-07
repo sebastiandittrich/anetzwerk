@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Image;
 use App\Tag;
+use App\Activity;
 
 class PostsController extends Controller
 {
@@ -52,12 +53,15 @@ class PostsController extends Controller
             $post->addImage($image);
         }
 
+        $post->track('create');
+
         return redirect('/posts');
     }
 
     public function delete(Post $post)
     {
         $post->checkOwner();
+        $post->track('delete');
         $post->removeAll();
         return redirect('/posts');
     }
@@ -80,6 +84,7 @@ class PostsController extends Controller
 
         $post->header = request('header');
         $post->save();
+        $post->track('update');
 
         return redirect('/posts/'.$post->id.'/details');
     }

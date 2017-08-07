@@ -16,7 +16,8 @@ class CreateShitsTable extends Migration
         Schema::create('shits', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('post_id');
+            $table->string('object');
+            $table->integer('object_id');
             $table->timestamps();
         });
     }

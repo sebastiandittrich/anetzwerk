@@ -26,6 +26,7 @@ class UsersController extends Controller
         foreach ($user->posts as $post) {
             $post->removeAll();
         }
+        User::find($user->id)->track('delete');
         User::find($user->id)->delete();
 
         return redirect('/users');
@@ -44,12 +45,20 @@ class UsersController extends Controller
 
         $user->email = request('email');
 
+        if(request('image_id')) {
+            if(request('image_id') != $user->image_id) {
+                $user->image_id = request('image_id');
+            }
+        }
+
         if(request('first_name')) {
             $user->first_name = request('first_name');
         }
         if(request('last_name')) {
             $user->last_name = request('last_name');
         }
+
+        $user->track('update');
 
         $user->save();
 

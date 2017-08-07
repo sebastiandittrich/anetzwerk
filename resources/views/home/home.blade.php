@@ -3,13 +3,19 @@
 <title>Home - Asoziales Netzwerk</title>
 
 @section('header')
-    <h1 class='ui inverted header'>Willkommen beim Asozialen Netzwerk. Hier kannst du alles machen.</h1>
+    <h1 class='ui inverted header'>Willkommen beim Asozialen Netzwerk.</h1>
     <script>setNav('home')</script>
 @endsection
 
 @section('content')
+    <div class="ui segment">
+        <h4 class="ui horizontal divider header">Aktivitäten</h4>
 
-    <button class="ui button green">hall</button>
-    <button class="ui button blue">hall</button>
+        <div class="ui feed">
+            @foreach($activities as $activity)
+                @include('activity.overview')
+            @endforeach
+        </div>
 
+    </div>
 @endsection

@@ -19,7 +19,9 @@
                     </div>
                     <div class="ui large stackable inverted secondary pointing menu" style="border-left: none; border-top: none; border-right: none;" id="menu">
                         <a id='home' href="/" class="active item">Home</a>
+                        <a id='activities' href="/activities" class="active item">Aktivitäten</a>
                         <a id='posts' href="/posts" class="item">Posts</a>
+                        <a id='quotes' href="/quotes" class="item">Zitate</a>
                         <a href="/users" id="user" class="item">Benutzer</a>
                         @if(Auth::check())
                             <a id='myprofile' href='/users/{{Auth::user()->id}}' class="item right">

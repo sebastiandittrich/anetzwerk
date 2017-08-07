@@ -3,18 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
-class Comment extends Model
+class Quote extends Model
 {
-    protected $fillable = ['content', 'user_id', 'post_id'];
+    protected $fillable = ['content', 'real_author', 'fake_author', 'user_id'];
 
     public function track(string $action) {
         Activity::store($action, self::class, $this->id);
-    }
-
-    public function post()
-    {
-        return $this->belongsTo(Post::class);
     }
 
     public function user()

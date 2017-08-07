@@ -11,6 +11,9 @@
 
     <form action="/users/{{$user->id}}/edit" class="ui form" method='POST'>
         <div class="ui segment">
+            <h4 class="ui horizontal divider header">Profilbild</h4>
+        </div>
+        <div class="ui segment">
             <h4 class="ui horizontal divider header">Persönliche Informationen</h4>
             <div class="two fields">
                 <div class="field">

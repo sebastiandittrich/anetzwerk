@@ -12,11 +12,15 @@
     <div class="ui dividied selection list">
     @foreach($users as $user)
         <a href="users/{{$user->id}}" class="item">
-            <div class="ui red label">
-                <i class="white user icon"></i>
-                {{$user->username}}
+            <img src="{{$user->profileimage()->getURL()}}" alt="Profile Picture" class="ui mini image">
+            <div class="content">
+                <div class="header">
+                    {{$user->username}}
+                </div>
+                <div class="content">
+                    {{$user->created_at->diffForHumans()}} beigetreten
+                </div>
             </div>
-            {{$user->created_at->diffForHumans()}} beigetreten
         </a>
     @endforeach
     </div>

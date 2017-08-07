@@ -61,7 +61,7 @@
                             Autor
                         </a>
                         <div class="item">
-                            <div class="ui brown horizontal label">{{count($post->shits)}}</div>
+                            <div class="ui brown horizontal label">{{count($post->shits())}}</div>
                             Leute finden das Scheiße
                         </div>
                         <div class="item">
