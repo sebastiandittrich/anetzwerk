@@ -79,7 +79,7 @@ class User extends Authenticatable
     }
 
     public function activities(int $limit) {
-        $activities = Activity::where('user_id', $this->id)->limit($limit)->get();
+        $activities = Activity::where('user_id', $this->id)->orderBy('updated_at', 'desc')->limit($limit)->get();
         foreach ($activities as $activity) {
             $activity->prepare();
         }

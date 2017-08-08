@@ -1,6 +1,6 @@
 <div class="event">
     <div class="label">
-        <i class="circular blue user icon"></i>
+        <img src="{{$activity->user->profileimage()->getURL()}}" alt="Profile Picture" class="ui avatar image">
     </div>
     <div class="content">
         <div class="summary">

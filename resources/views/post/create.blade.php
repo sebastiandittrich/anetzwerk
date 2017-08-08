@@ -28,7 +28,7 @@
                     <div class="ui huge icon button" id='modernfilebutton'><i class="add icon"></i></div>
                 </div>
             </div>
-            <input type="file" accepts='image/*' name='files[]' id='files' style='' multiple>
+            <input type="text" name='images' id='images' style='display:none'>
         </div>
         <div class="ui segment" id='tags'>
             <h4 class="ui horizontal divider header">Tags</h4>

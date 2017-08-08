@@ -49,8 +49,8 @@ class PostsController extends Controller
             $post->saveTag($tagname);
         }
 
-        foreach(count(request('files')) ? request('files') : [] as $image) {
-            $post->addImage($image);
+        foreach(json_decode(request('images')) as $image_id) {
+            $post->images()->attach($image_id);
         }
 
         $post->track('create');

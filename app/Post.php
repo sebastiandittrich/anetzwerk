@@ -41,7 +41,7 @@ class Post extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class);
+        return $this->belongsToMany(Image::class);
     }
 
     public function tags()
@@ -90,7 +90,6 @@ class Post extends Model
         }
 
         $savedimage = Image::create([
-            'post_id' => $this->id,
             'user_id' => auth()->id(),
             'path' => $path
         ]);

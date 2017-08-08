@@ -1,7 +1,16 @@
 $(document).ready(function() {
 
-    $('#modernfilebutton').click(function() {
-        $('#files').click()
+    // $('#modernfilebutton').click(function() {
+    //     $('#files').click()
+    // })
+
+    var images = []
+    $('#images').val(JSON.stringify(images))
+
+    imagedialog('#modernfilebutton', function(id, url) {
+        $('#result').prepend("<div class='item'><div class='ui small rounded image'><img src='" + url + "'/></div></div>");
+        images.push(id)
+        $('#images').val(JSON.stringify(images))
     })
 
     //Check File API support

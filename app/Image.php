@@ -6,12 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    protected $fillable = ['post_id', 'path', 'user_id'];
+    protected $fillable = ['path', 'user_id'];
 
     public static $supportedExtensions = ['png', 'gif', 'jpeg', 'bmp', 'xpm', 'wbmp', 'webp', 'xbm'];
 
     public function track(string $action) {
         Activity::store($action, self::class, $this->id);
+    }
+
+    public static function getRandomPath($image) {
+        $path = str_random(2)."/".str_random(30).".".$image->getClientOriginalExtension();
+
+        while(count(Image::where('path', $path)->get())) {
+            $path = str_random(2)."/".str_random(30).".".$image->getClientOriginalExtension();
+        }
+        return $path;
     }
 
 
@@ -22,7 +31,7 @@ class Image extends Model
 
     public function post()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsToMany(Post::class);
     }
 
     public static function getImagePath() {

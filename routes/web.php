@@ -59,3 +59,11 @@ Route::post('/quotes/new', 'QuotesController@store');
 
 // Aktivitäten
 Route::get('/activities', 'ActivitiesController@showall');
+
+// Bilder
+Route::post('/images/new', 'ImagesController@store');
+
+// Ajax 
+Route::get('/ajax/{element}', function($element) {
+    return view($element);
+});
