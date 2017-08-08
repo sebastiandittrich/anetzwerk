@@ -26,8 +26,9 @@
                         @if(Auth::check())
                             <a id='myprofile' href='/users/{{Auth::user()->id}}' class="item right">
                                 <div class="content">
-                                    <div class="ui sub header">Mein Profil</div>
-                                    {{Auth::user()->username}}
+                                    <div>
+                                        <img src="{{Auth::user()->profileimage()->getURL()}}" alt="Profile Picture" class="ui avatar image">{{Auth::user()->username}}
+                                    </div>
                                 </div>
                             </a>
                         @else

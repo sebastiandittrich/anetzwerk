@@ -64,4 +64,12 @@ class UsersController extends Controller
 
         return redirect('/users/'.$user->id);
     }
+
+    public function changeprofilepicture(User $user) {
+        $this->validate(request(), [
+            'image_id' => 'required|integer'
+        ]);
+        $user->image_id = intval(request('image_id'));
+        $user->save();
+    }
 }

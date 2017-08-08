@@ -2,7 +2,8 @@
 
 @section('header')
     <h2 class='ui left aligned inverted header'>Mein Profil bearbeiten</h2>
-    <script>setNav('users');</script>
+    <script>setNav('myprofile');</script>
+    <script src='{{asset('js/edituser.js')}}'></script>
 @endsection
 
 @section('content')
@@ -12,6 +13,18 @@
     <form action="/users/{{$user->id}}/edit" class="ui form" method='POST'>
         <div class="ui segment">
             <h4 class="ui horizontal divider header">Profilbild</h4>
+            <div class="ui horizontal list" id='changeprofilepicture'>
+                @foreach($user->images as $image)
+                    <div class='ui blurring item' data-id='{{$image->id}}'>
+                        @include('layout.postimage')
+                        <div class='ui inverted dimmer'>
+                            <div class="content">
+                                <div class="center"></div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
         <div class="ui segment">
             <h4 class="ui horizontal divider header">Persönliche Informationen</h4>

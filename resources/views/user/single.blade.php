@@ -2,7 +2,13 @@
 
 @section('header')
     <h2 class='ui left aligned header inverted'>Details</h2>
-    <script>setNav('user')</script>
+    @if(Auth::check())
+        @if(Auth::user()->id == $user->id)
+            <script>setNav('myprofile')</script>
+        @else
+            <script>setNav('user')</script>
+        @endif        
+    @endif
     <script src='{{asset('js/posts.js')}}'></script>
     <script src='{{asset('js/user.js')}}'></script>
 @endsection

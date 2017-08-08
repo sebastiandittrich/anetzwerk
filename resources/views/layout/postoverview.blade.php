@@ -1,5 +1,5 @@
 <a href='/posts/{{$post->id}}/details'><h5 class="ui top attached inverted header">{{$post->header}}</h5></a>
-<div class='ui attached tiny violet header'><a href='/users/{{$post->user->id}}'>{{$post->user->username}} {{$post->created_at->diffForHumans()}}</a></div>
+<div class='ui attached tiny violet header'><a href='/users/{{$post->user->id}}'><img src="{{$post->user->profileimage()->getURL()}}" alt="Profile Picture" class="ui avatar image">{{$post->user->username}} {{$post->created_at->diffForHumans()}}</a></div>
 @if(count($post->images))
     <div class="ui attached segment">
         <div class="ui horizontal list">
