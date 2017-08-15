@@ -15,11 +15,31 @@
 
 @section('content')
     {{csrf_field()}}
+
     <div class="ui two column stackable grid">
         <div class="column">
                 <img src="{{$user->profileimage()->getURL()}}" alt="" class="ui rounded large image profile-image">
         </div>
         <div class="column">
+            @if(Auth::user())
+                <div class="ui segment">
+                    <h4 class="ui horizontal divider header">Aktionen</h4>
+                        @if(Auth::user()->id == $user->id)
+                            <div class="ui buttons">    
+                                <a href='/logout' class="ui red labeled icon button">
+                                    <i class="log out icon"></i>
+                                    Abmelden
+                                </a>
+                                <a href='/users/{{$user->id}}/edit' class="ui blue right labeled icon button">
+                                    <i class="edit icon"></i>
+                                    Profil bearbeiten
+                                </a>
+                            </div>
+                        @else
+                            <div class="ui blue labeled icon button"><i class="spy icon"></i>regelmäßige, rein zufällige, verdachtsunanhängige Intensivkontrollen durchführen</div>
+                        @endif
+                </div> 
+            @endif
             <div class="ui huge top attached header">Das ist {{$user->username}}</div>
             <div class="ui bottom attached segment">
                 <div class="ui header">Letzte Aktivitäten</div>
@@ -31,24 +51,6 @@
             </div>
         </div>
     </div>
-
-    @if(Auth::user())
-        @if(Auth::user()->id == $user->id)
-            <div class="ui segment">
-                <h4 class="ui horizontal divider header">Aktionen</h4>
-                <div class="ui buttons">
-                    <a href='/logout' class="ui red labeled icon button">
-                        <i class="log out icon"></i>
-                        Abmelden
-                    </a>
-                    <a href='/users/{{$user->id}}/edit' class="ui blue right labeled icon button">
-                        <i class="edit icon"></i>
-                        Profil bearbeiten
-                    </a>
-                </div>
-            </div>
-        @endif
-    @endif
 
     <div class="ui segment">
         <h4 class="ui horizontal divider header">Allgemein</h4>

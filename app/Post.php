@@ -10,6 +10,8 @@ use App\Shit;
 
 class Post extends Model
 {
+    use UniversalProperties;
+
     protected $fillable = ['header', 'content', 'user_id'];
 
     public function track(string $action) {
@@ -51,7 +53,7 @@ class Post extends Model
 
     public function shits()
     {
-        return Shit::where('object', 'App\\Post')->where('object_id', $this->id)->get();
+        return $this->hasManyUniversal(Shit::class);
     }
 
     public function saveTag(string $tagname)

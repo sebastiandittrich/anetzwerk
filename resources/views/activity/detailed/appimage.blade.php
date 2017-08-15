@@ -1,0 +1,1 @@
+<img class="large image centered ui" style="" src="{{$activity->object->getURL()}}" alt="Image">

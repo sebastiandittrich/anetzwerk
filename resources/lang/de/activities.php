@@ -33,5 +33,14 @@
         'App\\Shit' => [
             'create' => 'findet etwas scheiße',
             'delete' => 'findet etwas doch nicht mehr scheiße'
+        ],
+        'App\\Follow' => [
+            'create' => 'folgt jetzt jemandem',
+            'delete' => 'folgt jetzt jemandem nicht mehr'
+        ],
+        'App\\Collection' => [
+            'create' => 'hat mehrere Elemente hochgeladen',
+            'update' => 'hat mehrere Elemente aktualisiert',
+            'delete' => 'hat mehrere Elemente gelöscht'
         ]
     ];

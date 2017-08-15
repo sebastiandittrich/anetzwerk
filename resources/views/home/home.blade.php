@@ -8,14 +8,10 @@
 @endsection
 
 @section('content')
-    <div class="ui segment">
-        <h4 class="ui horizontal divider header">Aktivitäten</h4>
-
-        <div class="ui feed">
-            @foreach($activities as $activity)
-                @include('activity.overview')
-            @endforeach
-        </div>
-
-    </div>
+<div class="ui container" style="color:black">
+    <h4 class="ui horizontal divider header">Aktivitäten</h4>
+    @foreach($activities as $activity)
+            @include('activity.detail')
+    @endforeach 
+</div>
 @endsection

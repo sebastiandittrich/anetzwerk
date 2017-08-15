@@ -1,7 +1,7 @@
 var toggleShit = function(id) {
     $.ajax({
         url: '/posts/' + id + '/shits/new',
-        data: { _token: $('input[name=_token]').val() },
+        data: {object: 'App\\Post', _token: $('input[name=_token]').val() },
         method: "POST"
     }).done(function(data) {
         if (data == "true") {

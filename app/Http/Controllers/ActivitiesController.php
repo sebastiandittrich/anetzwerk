@@ -14,9 +14,7 @@ class ActivitiesController extends Controller
         } else {
             $activities = Activity::orderBy('created_at', 'desc')->get();
         }
-        foreach($activities as $activity) {
-            $activity->prepare();
-        }
+        $activities = Activity::prepareMany($activities);
         return view('activity.all', compact('activities'));
     }
 }

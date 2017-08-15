@@ -37,6 +37,8 @@ class RegisterController extends Controller
 
         auth()->login($user);
 
+        $user->track('create');
+
         return redirect()->home();
     }
 }

@@ -6,10 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Shit;
 use App\Image;
+use App\Follow;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use UniversalProperties;
 
     public function track(string $action) {
         Activity::store($action, self::class, $this->id);
@@ -54,11 +56,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Image::class);
     }
-    
-    public function shits()
-    {
-        return $this->hasMany(Shit::class);
-    }
 
     public function comments()
     {
@@ -79,14 +76,26 @@ class User extends Authenticatable
     }
 
     public function activities(int $limit) {
-        $activities = Activity::where('user_id', $this->id)->orderBy('updated_at', 'desc')->limit($limit)->get();
-        foreach ($activities as $activity) {
-            $activity->prepare();
-        }
-        return $activities;
+        return Activity::prepareMany(Activity::where('user_id', $this->id)->orderBy('updated_at', 'desc')->limit($limit)->get());
     }
 
     public function profileimage() {
         return Image::find($this->image_id);
+    }
+
+    public function gofollow(User $user) {
+        Follow::create([
+            'user_id' => $this->id,
+            'follows' => $user->id
+        ])->track('create');
+
+    }
+
+    public function follows() {
+        $follows = [];
+        foreach (Follow::where('user_id', $this->id)->get() as $follow) {
+            $follows[] = User::find($follow->follows);
+        }
+        return $follows;
     }
 }

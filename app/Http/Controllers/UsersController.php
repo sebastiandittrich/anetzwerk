@@ -71,5 +71,6 @@ class UsersController extends Controller
         ]);
         $user->image_id = intval(request('image_id'));
         $user->save();
+        $user->track('update');
     }
 }
