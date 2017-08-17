@@ -1,1 +1,1 @@
-<img class="large image centered ui" style="" src="{{$activity->object->getURL()}}" alt="Image">
+<img style="margin-top:5px;margin-bottom:5px;max-height:500px;width:auto;background-color:transparent" class="image centered ui" style="" src="{{$activity->object->getURL()}}" alt="Image">

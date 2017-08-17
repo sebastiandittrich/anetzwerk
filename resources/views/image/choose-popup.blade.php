@@ -3,7 +3,7 @@
         {{csrf_field()}}
         <input type="file" accepts='image/*' name='files[]' id='files' style='' multiple>
     </form>
-    <div class="header"><i class="black arrow left icon" class="a-backbutton"></i> Wie willst du ein Bild hinzufügen?</div>
+    <div class="header"><i class="black arrow left icon a-backbutton"></i> Wie willst du ein Bild hinzufügen?</div>
     <div class="content main">
         <div class="ui list">
             <a class="item upload">

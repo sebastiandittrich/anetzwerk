@@ -1,4 +1,4 @@
-<div class="ui fluid centered card">
+<div class="ui fluid centered card" style="color:black">
     <div class="content">
         <div class="right floated meta">{{$activity->created_at->diffForHumans()}}</div>
         <a href="/users/{{$activity->user->id}}" class="header">

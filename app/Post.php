@@ -12,7 +12,8 @@ class Post extends Model
 {
     use UniversalProperties;
 
-    protected $fillable = ['header', 'content', 'user_id'];
+    protected $fillable = ['content', 'user_id'];
+    protected $whitelist = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'p', 'em', 'u', 's', 'pre', 'ol', 'li', 'ul', 'span'];
 
     public function track(string $action) {
         Activity::store($action, self::class, $this->id);
@@ -109,5 +110,16 @@ class Post extends Model
         }
 
         return $savedimage;
+    }
+
+    public function htmlTagCheck() {
+        $matches = [];
+        preg_match_all('/<(?<tag>.+)>?(.+)<\/(?P=tag)>/', $this->content, $matches);
+        foreach($matches['tag'] as $tagname) {
+            if(!in_array($tagname, $this->whitelist)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

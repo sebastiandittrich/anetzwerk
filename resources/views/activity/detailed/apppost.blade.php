@@ -1,4 +1,3 @@
 <div class="content">
-    <b>{{$activity->object->header}}</b><br>
-    {{$activity->object->content}}
+    <?php echo $activity->object->content ?>
 </div>

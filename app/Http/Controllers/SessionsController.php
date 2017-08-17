@@ -20,7 +20,7 @@ class SessionsController extends Controller
     {
         if(!auth()->attempt(request(['username', 'password']))) {
             return back()->withErrors([
-                'message' => 'Please check your credentials and try again.'
+                'message' => 'Bitte überprüfe deine Eingaben und versuche es erneut.'
             ]);
         }
         return redirect()->home();

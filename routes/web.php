@@ -59,6 +59,8 @@ Route::post('/quotes/new', 'QuotesController@store');
 
 // Aktivitäten
 Route::get('/activities', 'ActivitiesController@showall');
+Route::get('/activities/new', 'ActivitiesController@create');
+Route::post('/activities/new', 'ActivitiesController@store');
 
 // Bilder
 Route::post('/images/new', 'ImagesController@store');

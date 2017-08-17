@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="ui vertical inverted grey stripe segment">
-                <div class="ui container">
+                <div id="page-content" class="ui container">
                     @yield('content')
                 </div>
             </div>

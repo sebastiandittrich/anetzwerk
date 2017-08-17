@@ -1,13 +1,16 @@
-<div class="center aligned content">
-    <a href="/users/{{$activity->object->id}}" class="ui compact segments">
-        <div href="/users/{{$activity->object->id}}" class="ui raised segment">
-            <img class="ui small rounded image" src="{{$activity->object->profileimage()->getURL()}}" />
-        </div>
-        <div href="/users/{{$activity->object->id}}" class="ui raised segment">
-            @if($activity->object->first_name != "" || $activity->object->last_name != "")
-                <div class="ui small header">{{$activity->object->first_name}} {{$activity->object->last_name}}</div>
-            @endif
-            {{$activity->object->username}}
-        </div>
-    </a>
+<div class="content">
+    <div class="ui list">
+        <a class="ui item" href="/users/{{$activity->object->id}}">
+            <img src="{{$activity->object->profileimage()->getURL()}}" alt="" class="ui mini image">
+            <div class="content">
+                @if($activity->object->first_name != "" || $activity->object->last_name != "")
+                    <div class="header">{{$activity->object->first_name}} {{$activity->object->last_name}}</div>
+                    <div class="description">{{$activity->object->username}}</div>
+                @else
+                    <div class="header">{{$activity->object->username}}</div>
+                @endif
+                
+            </div>
+        </a>
+    </div>
 </div>
