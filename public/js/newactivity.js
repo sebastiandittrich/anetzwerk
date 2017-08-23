@@ -60,35 +60,42 @@ $(document).ready(function() {
             },
             addImage(id, url) {
                 this.addedelements.push({object: 'App\\Image', object_id: id, url: url, index: this.getFreeIndex()})
-                window.scrollTo(0,document.body.scrollHeight);
+                $('body').animate({scrollTop: document.body.scrollHeight},500);
+            },
+            moveElement(index, new_index) {
+                element = this.addedelements.find(function(element) { return element.index === index})
+                this.addedelements.splice(this.addedelements.indexOf(this.addedelements.find(function(element) { return element.index === index})), 1)
+                this.addedelements = this.addedelements.slice(0,new_index).concat([element].concat(this.addedelements.slice(new_index, this.addedelements.length)))
             }
         }
     })
 
-    $('#additembuttons .a-image').click(function() {
-        $('.a-chooseimage').modal('show')
-    })
-    $('.a-chooseimage .uploadform #files').change(function() {
-        $.ajax({url: '/images/new', type: 'POST', data: new FormData($('.uploadform')[0]), processData: false, contentType: false, success: function(response) {
-            for(var i = 0; i < response.length; i++) {
-                vue.addImage(response[i][0], response[i][1])
-            }
-            $('.a-chooseimage').modal('hide')
-        }});
-    })
-    $('.item.upload').click(function() {
-        $('.a-chooseimage .uploadform #files').click()
-    })
-    $('.a-chooseimage').find('.item.my').click(function() {
-        $('.a-chooseimage').find('.content.main, .content.all').hide()
-        $('.a-chooseimage').find('.content.my').css('display', '')
-    })
-    $('.a-chooseimage .content.my img').click(function() {
-        $('.a-chooseimage').modal('hide')
-        vue.addImage($(this).attr('data-id'), $(this).attr('src'))
-    })
-    $('.a-chooseimage').find('.a-backbutton').click(function() {
-        $('.a-chooseimage').find('.content.my, .content.all').hide()
-        $('.a-chooseimage').find('.content.main').show()
-    })
+    imagedialog('#additembuttons .a-image', vue.addImage)
+
+    // $('#additembuttons .a-image').click(function() {
+    //     $('.a-chooseimage').modal('show')
+    // })
+    // $('.a-chooseimage .uploadform #files').change(function() {
+    //     $.ajax({url: '/images/new', type: 'POST', data: new FormData($('.uploadform')[0]), processData: false, contentType: false, success: function(response) {
+    //         for(var i = 0; i < response.length; i++) {
+    //             vue.addImage(response[i][0], response[i][1])
+    //         }
+    //         $('.a-chooseimage').modal('hide')
+    //     }});
+    // })
+    // $('.item.upload').click(function() {
+    //     $('.a-chooseimage .uploadform #files').click()
+    // })
+    // $('.a-chooseimage').find('.item.my').click(function() {
+    //     $('.a-chooseimage').find('.content.main, .content.all').hide()
+    //     $('.a-chooseimage').find('.content.my').css('display', '')
+    // })
+    // $('.a-chooseimage .content.my img').click(function() {
+    //     $('.a-chooseimage').modal('hide')
+    //     vue.addImage($(this).attr('data-id'), $(this).attr('src'))
+    // })
+    // $('.a-chooseimage').find('.a-backbutton').click(function() {
+    //     $('.a-chooseimage').find('.content.my, .content.all').hide()
+    //     $('.a-chooseimage').find('.content.main').show()
+    // })
 })

@@ -3,7 +3,7 @@
 <title>Elemente hochladen - Asoziales Netzwerk</title>
 
 @section('header')
-    <h1 class='ui inverted header left aligned'>Neue Aktivität</h1>
+    <h1 class='ui inverted header'>Neue Aktivität</h1>
     <script>setNav('activities')</script>
     <script src="{{asset('js/newactivity.js')}}"></script>
     <script src="//cdn.quilljs.com/1.3.1/quill.min.js"></script>
@@ -14,10 +14,10 @@
 {{csrf_field()}}
 <div id="vuebox">
     <div id="addedcontent" class="ui container">
-        <div class="ui container" v-for="element in addedelements">
+        <div style="margin-top:10px;margin-bottom:10px;" class="ui container" v-for="element in addedelements">
             <div class="ui small rounded image" v-if="element.object=='App\\Image'">
                 <a class="ui red right corner label a-close" @click="deleteElement(element.index)"><i class="close window icon"></i></a>
-                <img v-bind:src="element.url" alt="Picture"><br>
+                <img v-bind:src="element.url" alt="Picture">
             </div>
             <div class="ui segment" style="padding:0px;" v-if="element.object=='App\\Post'">
                 <a class="ui red right corner label a-close" @click="deleteElement(element.index)"><i class="close window icon"></i></a>

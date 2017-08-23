@@ -5,14 +5,28 @@ pre.ql-syntax {
     padding: 5px;
 }
 
+.anetworkgradient {
+    background: linear-gradient(45deg, #000BA5 0%, #7781FF 100% ) !important
+}
+
+.anetworkgradient-inverted {
+    background: linear-gradient(45deg, #7781FF 0%, #000BA5 100% ) !important
+}
+
+.asearchinput input {
+    background-color: transparent !important;
+    color: white !important;
+    border: none !important;
+}
+
 @media only screen and (max-width: 767px) {
-    #menu {
+    #menu, #search, #searchicon {
         display: none;
     }
 }
 
 @media only screen and (min-width: 768px) {
-    #pagemenubutton {
+    #pagemenubuttoncontainer {
         display: none;
     }
     br.responsive {

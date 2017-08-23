@@ -46,4 +46,5 @@
         <button type="submit" class="ui positive labeled icon left aligned button"><i class='save icon'></i>Änderungen speichern</button>
     </form>
 
+    @include('image.choose-popup')
 @endsection

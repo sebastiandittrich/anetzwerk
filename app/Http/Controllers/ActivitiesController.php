@@ -9,12 +9,7 @@ class ActivitiesController extends Controller
 {
     public function showall()
     {
-        if(auth()->check()) {
-            $activities = Activity::where('user_id', '!=', auth()->id())->orderBy('created_at', 'desc')->get();
-        } else {
-            $activities = Activity::orderBy('created_at', 'desc')->get();
-        }
-        $activities = Activity::prepareMany($activities);
+        $activities = Activity::prepareMany(Activity::orderBy('created_at', 'desc')->get());
         return view('activity.all', compact('activities'));
     }
 
