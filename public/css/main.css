@@ -6,7 +6,8 @@ pre.ql-syntax {
 }
 
 .anetworkgradient {
-    background: linear-gradient(45deg, #000BA5 0%, #7781FF 100% ) !important
+    background: linear-gradient(45deg, #000BA5 0%, #7781FF 100% ) !important;
+    transition: display 5s;
 }
 
 .anetworkgradient-inverted {

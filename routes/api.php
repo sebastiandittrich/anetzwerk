@@ -26,6 +26,9 @@ Route::get('/users', function() {
 Route::get('/users/{user}', function(User $user) {
     return $user;
 });
+Route::get('/users/{username}/getid', function(string $username) {
+    return User::where('username', $username)->get()[0];
+});
 
 // Posts
 Route::get('/posts', function() {
