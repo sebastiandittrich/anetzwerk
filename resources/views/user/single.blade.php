@@ -97,7 +97,7 @@
             <div class="item">
                 Findet
                 <div class="ui brown label">
-                    {{count($user->shits)}}
+                    {{count($user->shits())}}
                 </div>
                 Posts scheiße
             </div>

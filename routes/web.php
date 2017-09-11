@@ -35,10 +35,14 @@ Route::get('/posts/{post}/edit', 'PostsController@edit')->middleware('auth');
 Route::post('/posts/{post}/edit', 'PostsController@update')->middleware('auth');
 
 // Comments
-Route::post('/posts/{post}/comments/new', 'CommentsController@store')->middleware('auth');
+Route::post('/comments/new', 'CommentsController@store')->middleware('auth');
+
+// Collections
+Route::get('/collections/new', 'CollectionsController@create')->middleware('auth');
+Route::post('/collections/new', 'CollectionsController@store')->middleware('auth');
 
 // Shits
-Route::post('/posts/{post}/shits/new', 'ShitsController@store')->middleware('auth');
+Route::post('/shits/new', 'ShitsController@store')->middleware('auth');
 
 // Tags
 Route::get('/tags/{tag}', 'TagsController@show');
@@ -59,8 +63,8 @@ Route::post('/quotes/new', 'QuotesController@store')->middleware('auth');
 
 // Aktivitäten
 Route::get('/activities', 'ActivitiesController@showall');
-Route::get('/activities/new', 'ActivitiesController@create')->middleware('auth');
-Route::post('/activities/new', 'ActivitiesController@store')->middleware('auth');
+Route::get('/activities/new', 'CollectionsController@create')->middleware('auth');
+Route::post('/activities/new', 'CollectionsController@store')->middleware('auth');
 
 // Bilder
 Route::post('/images/new', 'ImagesController@store')->middleware('auth');

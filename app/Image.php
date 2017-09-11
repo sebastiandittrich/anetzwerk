@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
+    use UniversalProperties;
+    use Shittable;
     protected $fillable = ['path', 'user_id'];
 
     public static $supportedExtensions = ['png', 'gif', 'jpeg', 'bmp', 'xpm', 'wbmp', 'webp', 'xbm'];
@@ -23,6 +25,12 @@ class Image extends Model
         return $path;
     }
 
+    public function saveFile($file) {
+        if(!is_dir(Image::getImagePath().substr($this->path, 0, 2))) {
+            mkdir(Image::getImagePath().substr($this->path, 0, 2));
+        }
+        $file->move($this->getSubFolderPath(), $this->getImageName());
+    }
 
     public function user()
     {

@@ -1,3 +1,3 @@
 <div class="content">
-    <?php echo $activity->object->content ?>
+    <?php echo $object->content ?>
 </div>

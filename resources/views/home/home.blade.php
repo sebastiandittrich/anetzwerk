@@ -57,9 +57,62 @@
             </div>
         </div>
     @endif
-    {{--  <div class="ui padded segment">
-        <h3 class="ui horizontal divider header">Erklärung zum Asozialen Netzwerk</h3>
-        Weil nähmlich das System asozial ist, ist alles was sozial genannt wird eigentlich asozial, darum muss etwas wahrhaft soziales asozial genannt werden. Folglich ist ein soziales Netzwerk ein asoziales." ~ Das Känguru im Känguru-Manifest von Marc-Uwe Kling
+@endsection
+
+@section('content')
+@if(Auth::check())
+    <h2 class="ui horizontal divider header">Neuigkeiten</h2>
+    <div class="ui centered cards">
+        <div class="ui card">
+            <div class="content">
+                <div class="ui icon header"><i class="newspaper blue icon"></i>Erweiterte Posts</div>
+                <div class="description">Du kannst jetzt mehrere Elemente auf einmal hochladen, die als Sammlung angezeigt werden.</div>
+            </div>
+            <a href="/activities/new" class="ui bottom attached green button right labeled icon">
+                <i class="add icon"></i> 
+                Elemente hochladen   
+            </a>
+        </div>
+        <div class="ui card">
+            <div class="content">
+                <div class="ui icon header"><i class="user blue icon"></i>Login</div>
+                <div class="description">Die Login und Registrierungs-Oberflächen wurden Überarbeitet und sehen jetzt noch besser aus!</div>
+            </div>
+            <a href="/login" class="ui bottom attached green right labeled icon button">
+                <i class="id card outline icon"></i> 
+                Jetzt ansehen 
+            </a>
+        </div>
+        <div class="ui card">
+            <div class="content">
+                <div class="ui icon header"><i class="image blue icon"></i>Profilbilder</div>
+                <div class="description">Jeder Benutzer kann jetzt ein persönliches Profilbild hochladen, welches überall angezeigt wird, wo dein Profil auftaucht.</div>
+            </div>
+            <a href="/users/{{Auth::user()->id}}/edit" class="ui bottom attached green right labeled icon button">
+                <i class="id mouse pointer icon"></i> 
+                Jetzt ein Profilbild festlegen
+            </a>
+        </div>
+        <div class="ui card">
+            <div class="content">
+                <div class="ui icon header"><i class="blue search icon"></i>Suche</div>
+                <div class="description">Du kannst jetzt das Asoziale Netzwerk einfach nach Benutzern, Aktivitäten und anderem durchsuchen!</div>
+            </div>
+            <a href="/search/all/?query=Test" class="ui bottom attached green right labeled icon button">
+                <i class="search icon"></i> 
+                Suche starten
+            </a>
+        </div>
+        <div class="ui card">
+            <div class="content">
+                <div class="ui icon header"><i class="red remove icon"></i>Posts</div>
+                <div class="description">Posts wurden durch Erweiterte Posts ersetzt. Aber keine Angst: bestehende Posts bleiben weiterhin erhalten!</div>
+            </div>
+            <a href="/activities" class="ui bottom attached red right labeled icon button">
+                <i class="newspaper icon"></i> 
+                Erweiterte Posts anzeigen
+            </a>
+        </div>
     </div>
-    <img src="{{asset('/pictures/logo-home.png')}}" alt="" class="ui huge centered image">  --}}
+@endif
 @endsection

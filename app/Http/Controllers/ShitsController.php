@@ -8,21 +8,25 @@ use App\Shit;
 
 class ShitsController extends Controller
 {
-    public function store(Post $post)
+    public function store()
     {
-        $found = Shit::where('user_id', auth()->id())->where('object', 'App\\Post')->where('object_id', $post->id)->first();
+        $this->validate(request(), [
+            'object_name' => 'required',
+            'object_id' => 'required'
+        ]);
+        $found = Shit::where('user_id', auth()->id())->where('object', request('object_name'))->where('object_id', request('object_id'))->first();
         if(count($found)) {
             $found->track('delete');
             $found->delete();
-            echo "false";
+            echo "falsch";
         } else {
             Shit::create([
-                'object' => 'App\\Post',
-                'object_id' => $post->id,
+                'object' => request('object_name'),
+                'object_id' => request('object_id'),
                 'user_id' => auth()->id()
             ])->track('create');
 
-            echo "true";
+            echo "richtig";
         }
     }
 }

@@ -20,10 +20,10 @@
             <div class="ui clearing container" v-if="steps.password">
                 <div class="ui large right floated list">
                     <div class="item">
-                        <img :src="userdata.imageurl" v-show="userdata.imageurl != null" @load="profile_image_loaded" class="ui right floated image avatar profile" :class="{loaded: userdata.imageurl !== null}"/>
+                        <img :src="userdata.imageurl" v-show="userdata.imageurl != null && !failed" @load="profile_image_loaded" class="ui right floated image avatar profile" :class="{loaded: userdata.imageurl !== null}"/>
                         <div class="content">
-                            <div class="header">@{{userdata.firstname}} @{{userdata.lastname}}</div>
-                            <div class="description">@{{userdata.username}}</div>  
+                            <div class="header"><span v-show="!failed">@{{userdata.firstname}} @{{userdata.lastname}}</span><span style="color: red;" v-show="failed"><i class="red warning circle icon"></i>@{{failtext}}</span></div>
+                            <div class="description" v-show="!failed">@{{userdata.username}}</div>  
                         </div>    
                     </div>
                 </div>
@@ -34,19 +34,22 @@
                 <div class="field">
                     <div class="ui left icon input" v-show="steps.username">
                         <i class="user icon"></i>
-                        <input v-model="userdata.username" type="username" name="username" placeholder="Benutzernamen eingeben...">
+                        <input v-model="userdata.username" type="username" name="username" placeholder="Benutzernamen eingeben..." >
                     </div>
                 </div>
                 <div class="field" v-show="steps.password">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="password" name="password" placeholder="Passwort eingeben...">
+                        <input v-model="userdata.password" type="password" name="password" placeholder="Passwort eingeben..." >
                     </div>
                 </div>
-                <div id="log-in-button" v-show="steps.password" class="field" v-show="steps.password" @click="login_clicked">
-                    <button type="submit" class="ui fluid blue submit button" id="login">
+                <div id="log-in-button" v-show="steps.password" class="field" v-show="steps.password">
+                    <button v-show="userdata.password" type="submit" class="ui fluid blue submit button" id="login">
                         Log in
                     </button>
+                    <div class="ui fluid blue basic button" v-show="userdata.password == null || userdata.password == ''" @click="back_clicked">
+                        Zurück
+                    </div>
                 </div>
                 <div id="continue-button" class="field" v-show="steps.username" @click="continue_clicked">
                     <div class="ui fluid blue button">
@@ -55,7 +58,6 @@
                 </div>
                 {{csrf_field()}}
             </form>
-            <a href="#" v-if="steps.password"  @click="function() {steps.username = true; steps.password = false}">Zurück</a>
         </div>
         <div style="text-align:center" class="ui message">
             Du bist dem Asozialen Netzwerk noch nicht beigetreten? <a href="/register">Registrieren</a>

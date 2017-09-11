@@ -3,16 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Activity;
+use App\Collection;
 
-class ActivitiesController extends Controller
+class CollectionsController extends Controller
 {
-    public function showall()
-    {
-        $activities = Activity::orderBy('created_at', 'desc')->get();
-        return view('activity.all', compact('activities'));
-    }
-
     public function create() {
         return view('activity.create');
     }
@@ -22,6 +16,11 @@ class ActivitiesController extends Controller
             'objects' => 'required'
         ]);
         $i = 0;
+        if(count(request('objects')) > 1) {
+            $collection = Collection::create([
+                'user_id' => auth()->id()
+            ])->track('create');
+        }
         foreach(request('objects') as $object) {
             if(!$object['object_id']) {
                 $params = [];
@@ -38,15 +37,19 @@ class ActivitiesController extends Controller
                         return view('layout.formerrors')->withErrors(['message' => 'Eines deiner Textfelder enthält ungültigen HTML-Code. Überprüfe das noch einmal.']);
                     }
                 }
+                if(count(request('objects')) > 1) {
+                    $collection->addElement($model->id, $object['object'], $i);
+                } else {
+                    $model->track('create');
+                }
                 $object['object_id'] = $model->id;
+            } else {
+                if(count(request('objects')) > 1) {
+                    $collection->addElement($object['object_id'], $object['object'], $i);
+                } else {
+                    ("\\".$object['object'])::find($object['object_id'])->track('share');
+                }
             }
-            Activity::create([
-                'user_id' => auth()->id(),
-                'object' => $object['object'],
-                'object_id' => $object['object_id'],
-                'action' => 'create',
-                'time_index' => $i
-            ]);
             $i++;
         }
         return "true";

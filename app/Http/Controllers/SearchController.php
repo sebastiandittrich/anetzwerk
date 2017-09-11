@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Activity;
 
 class SearchController extends Controller
 {
@@ -23,13 +24,25 @@ class SearchController extends Controller
     public function all() {
         $query = request('query');
         $results = [];
+        $activityresults = [];
         foreach(self::$searchable as $typename => $type) {
             foreach($type as $property) {
-                $results[] = ['name' => $typename, 'results' => ('\\'.$typename)::where($property, 'LIKE', '%' . $query . '%')->get()];
+                $results[$typename] = array_has($results, $typename) ? array_merge($results[$typename], ('\\'.$typename)::where($property, 'LIKE', '%' . $query . '%')->get(['id'])->toArray()):('\\'.$typename)::where($property, 'LIKE', '%' . $query . '%')->get(['id'])->toArray();
             }
         }
 
-        $results['meta'] = ['counter' => count(array_flatten($results)), 'query' => $query];
+        foreach($results as $type => $typeresults) {
+            foreach($typeresults as $result) {
+                $actualresults = Activity::where('object', $type)->where('object_id', $result['id'])->get()->toArray();
+                foreach($actualresults as $singleresult) {
+                    $activityresults[] = $singleresult['id'];
+                }
+                $actualresults = [];
+            }
+        }
+
+
+        $results = Activity::prepareMany(Activity::whereIn('id', $activityresults)->get());
         
         return view('search.results', compact('results'));
     }

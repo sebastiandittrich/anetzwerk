@@ -12,6 +12,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use UniversalProperties;
+    use Shittable;
 
     public function track(string $action) {
         Activity::store($action, self::class, $this->id);
@@ -67,8 +68,11 @@ class User extends Authenticatable
         return $this->hasMany(Quote::class);
     }
 
-    public function shit(Post $post) {
-        if(count(Shit::where('user_id', auth()->id())->where('object', 'App\\Post')->where('object_id', $post->id)->get())) {
+    public function shits($object = null) {
+        if($object == null) {
+            return Shit::where('user_id', auth()->id())->get();
+        }
+        if(count(Shit::where('user_id', auth()->id())->where('object', 'App\\Activity')->where('object_id', $object->id)->get())) {
             return true;
         } else {
             return false;

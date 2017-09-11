@@ -4,26 +4,29 @@
         <a href="/users/{{$activity->user->id}}" class="header">
             <img src="{{$activity->user->profileimage()->getURL()}}" alt="Profile Picture" class="ui avatar image">
             {{$activity->user->username}}
-            @lang('activities.'.$activity->object_name.'.'.$activity->action)
+            @lang('activities.'.$activity->object.'.'.$activity->action)
         </a>
     </div>
-@foreach($activity->collection as $activity)
     @if($activity->action != 'delete')
-        @if(View::exists('activity.detailed.'.str_slug($activity->object_name, '-')))
-            @include('activity.detailed.'.str_slug($activity->object_name, '-'))
+        @if(View::exists('activity.detailed.'.str_slug($activity->object, '-')))
+            @include('activity.detailed.'.str_slug($activity->object, '-'), ['object' => $activity->object()])
         @endif
     @endif
-@endforeach
 @if(Auth::check())
     <div class="content">
-        <span class="right floated"><i class="heart outline icon"></i>17 Shits</span>  
-        <i class="comment icon"></i>13 Comments
+        @if(property_exists($activity->object(), 'shittable'))
+            <span data-id="{{$activity->id}}" data-object="{{$activity->object}}" class="right floated a-shit">
+                <i class="{{$activity->object()->userShits() ? '' : 'outline'}} thumbs down icon"></i>
+                <span class="counter">{{count($activity->shits())}}</span>
+            </span>  
+        @endif
+        <i class="comment <?php echo count($activity->comments()) ? '' : 'outline' ?> icon"></i><span class="counter">{{count($activity->comments())}}</span> Comments
     </div>
     <div class="extra content">
         <div class="ui fluid transparent large left icon input">
             <i class="comment outline icon"></i>
-            <input type="text" placeholder="Gib deinen Senf dazu...">
+            <input data-id="{{$activity->id}}" data-object="{{$activity->object}}" class="a-comment" type="text" placeholder="Gib deinen Senf dazu...">
         </div>
-    </div>
+    </div> 
 @endif 
 </div>

@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Follow extends Model
+trait Trackable
 {
-    use UniversalProperties;
-    protected $fillable = ['user_id', 'follows'];
     public function track(string $action) {
         Activity::store($action, self::class, $this->id);
+        return $this;
     }
 }

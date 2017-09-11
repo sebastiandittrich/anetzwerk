@@ -5,7 +5,6 @@
 @section('header')
     <h1 class='ui inverted header left aligned'>Aktivitäten</h1>
     <script>setNav('activities')</script>
-    <script src='{{asset('js/quotes.js')}}'></script>
 @endsection
 
 @section('content')
@@ -29,9 +28,5 @@
         </div>
     @endif
     <h4 class="ui horizontal divider header">Alle Aktivitäten</h4>
-    <div class="ui feed">
-        @foreach($activities as $activity)
-            @include('activity.detail')
-        @endforeach
-    </div>
+    @include('activity.manydetailed')
 @endsection

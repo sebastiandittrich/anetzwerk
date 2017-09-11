@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $fillable = ['content', 'user_id', 'post_id'];
+    use UniversalProperties;
+    protected $fillable = ['content', 'object', 'object_id', 'user_id'];
 
     public function track(string $action) {
         Activity::store($action, self::class, $this->id);

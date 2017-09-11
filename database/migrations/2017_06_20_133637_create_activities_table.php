@@ -19,7 +19,6 @@ class CreateActivitiesTable extends Migration
             $table->string('action');
             $table->string('object');
             $table->integer('object_id')->default(-1);
-            $table->integer('time_index');  
             $table->timestamps();
         });
     }
