@@ -2,15 +2,19 @@
 
 @section('header')
     <h2 class='ui left aligned header inverted'>Details</h2>
+    <script>setNav('user')</script>
     @if(Auth::check())
         @if(Auth::user()->id == $user->id)
             <script>setNav('myprofile')</script>
-        @else
-            <script>setNav('user')</script>
         @endif        
     @endif
     <script src='{{asset('js/posts.js')}}'></script>
     <script src='{{asset('js/user.js')}}'></script>
+    <script src='{{asset('js/quotes.js')}}'></script>
+@endsection
+
+@section('title')
+    {{$user->username}}
 @endsection
 
 @section('content')
@@ -43,11 +47,7 @@
             <div class="ui huge top attached header">Das ist {{$user->username}}</div>
             <div class="ui bottom attached segment">
                 <div class="ui header">Letzte Aktivitäten</div>
-                <div class="ui feed">
-                    @foreach($user->activities(3) as $activity)
-                        @include('activity.overview')
-                    @endforeach
-                </div>
+                @include('activity.manypreviewed', ['objects' => $user->activities(3)])
             </div>
         </div>
     </div>
@@ -84,13 +84,13 @@
         <div class="ui divided animated selection list">
             <div class="item">
                 <div class="ui blue label">
-                    {{count($user->posts)}}
+                    {{count($user->elements())}}
                 </div>
-                Posts veröffentlicht
+                Elemente veröffentlicht
             </div>
             <div class="item">
                 <div class="ui violet label">
-                    {{count($user->comments)}}
+                    {{count($user->comments())}}
                 </div>
                 Kommentare geschrieben
             </div>
@@ -118,9 +118,9 @@
     @endif
     
     <h4 class="ui horizontal divider header">Posts von diesem Benutzer</h4>
-    @if(count($user->posts))
-        @foreach($user->posts()->orderBy('updated_at', 'DESC')->get() as $post)
-            @include('layout.postoverview')
+    @if(count($user->elements()))
+        @foreach($user->elements() as $element)
+            @include('overview.frame', ['object' => $element])
         @endforeach
     @else
         <div class="ui inverted red segment">

@@ -1,11 +1,11 @@
 <?php
 
     return [
-        'App\\Post' => 'Posts',
-        'App\\Comment' => 'Kommentare',
-        'App\\Quote' => 'Zitate',
-        'App\\User' => 'Benutzer',
+        'App\\Post' => 'Post|Posts',
+        'App\\Comment' => 'Kommentar|Kommentare',
+        'App\\Quote' => 'Zitat|Zitate',
+        'App\\User' => 'Benutzer|Benutzer',
         'App\\Follow' => 'zufällige, verdachtsun',
-        'App\\Tag' => 'Tags',
-        'App\\Collection' => 'Sammlungen'
+        'App\\Tag' => 'Tag|Tags',
+        'App\\Collection' => 'Sammlung|Sammlungen',
     ];

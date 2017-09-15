@@ -8,6 +8,8 @@ class Image extends Model
 {
     use UniversalProperties;
     use Shittable;
+    use Commentable;
+    use Belonging;
     protected $fillable = ['path', 'user_id'];
 
     public static $supportedExtensions = ['png', 'gif', 'jpeg', 'bmp', 'xpm', 'wbmp', 'webp', 'xbm'];
@@ -30,11 +32,6 @@ class Image extends Model
             mkdir(Image::getImagePath().substr($this->path, 0, 2));
         }
         $file->move($this->getSubFolderPath(), $this->getImageName());
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     public function post()

@@ -1,4 +1,4 @@
-var refreshview = function() {
+var refreshuserview = function() {
     if ($(window).width() < 768) {
         $('img.profile-image').addClass('centered');
     } else {
@@ -7,8 +7,8 @@ var refreshview = function() {
 }
 
 $(document).ready(function() {
-    refreshview();
+    refreshuserview();
     $(window).resize(function() {
-        refreshview();
+        refreshuserview();
     });
 });

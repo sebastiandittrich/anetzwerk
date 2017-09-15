@@ -24,9 +24,9 @@ var postcomment = function(object, object_id, text, callback) {
         data: {object: object, object_id: object_id, content: text, _token: $('input[name=_token]').val() },
         method: "POST"
     }).done(function(data) {
-        callback();
-    }).always(function(data) {
-        $('body').prepend(data)
+        callback(data);
+    }).fail(function(data) {
+        alert('Etwas ist schief gegangen. Versuche es noch einmal')
     })
 }
 
@@ -35,32 +35,38 @@ var main = function() {
         toggleShit( $(this).attr('data-id'), $(this).attr('data-object') )
         if ($(this).find('i').hasClass('outline')) {
             $(this).find('i').removeClass('outline');
-            $(this).find('.counter').text(parseInt($(this).find('.counter').text()) + 1)
+            $(this).find('.counter').text(parseInt($(this).find('.counter.a-shit').text()) + 1)
         } else {
             $(this).find('i').addClass('outline');
-            $(this).find('.counter').text(parseInt($(this).find('.counter').text()) - 1)
+            $(this).find('.counter').text(parseInt($(this).find('.counter.a-shit').text()) - 1)
         }
+    })
+
+    $('.a-comment.a-close').click(function() {
+        $(this).closest('.content').slideToggle('fast');
+    })
+
+    $('.a-comment.a-show').click(function() {
+        $(this).closest('.card').find('.content.a-comment').slideToggle('fast');
     })
 
     $('.a-comment').keypress(function(event) {
         if(event.which == 13) {
             var self = this
-            postcomment($(this).attr('data-object'), $(this).attr('data-id'), $(this).val(), function() {
-                alert('comment posted')
-                $(self).closest('.card').find('.counter').text(parseInt($(self).closest('.card').find('.counter').text() + 1));
+            var $card = $(self).closest('.card')
+            $(self).closest('.card').find('.comments').append('<i class="notched circle loading icon"></i>')
+            if(($card).find('.comments').parent().css('display') == 'none') {
+                $card.find('.comments').parent().css('display', '');
+            }
+            postcomment($(this).attr('data-object'), $(this).attr('data-id'), $(this).val(), function(data) {
+                $card.find('.counter.a-comment').text(parseInt($card.find('.counter.a-comment').text()) + 1);
                 $(self).val('')
                 $(self).parent().find('i').removeClass('outline')
+                $card.find('.comments').append(data)
+                $card.find('.comments').find('i').remove()
             })
         }
     })
-
-    $('.image img').click(function() {
-        $(this).parent().children('.modal').modal('show');
-    })
-
-    $('.button .close').parent().click(function() {
-        $(this).parent().parent().modal('hide');
-    });
 }
 
 $(document).ready(main);

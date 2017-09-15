@@ -10,8 +10,6 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $activities = Activity::prepareMany(Activity::orderBy('created_at', 'desc')->get());
-        
-        return view('home.home', compact('activities'));
+        return view('home.home');
     }
 }

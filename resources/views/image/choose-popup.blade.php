@@ -1,4 +1,7 @@
 <div class="ui modal a-chooseimage">
+    <div class="ui dimmer">
+        <div class="ui indeterminate text loader">Bilder werden hochgeladen</div>
+    </div>
     <form class="uploadform" style="display:none">
         {{csrf_field()}}
         <input type="file" accepts='image/*' name='files[]' id='files' style='' multiple>

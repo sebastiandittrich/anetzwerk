@@ -1,14 +1,19 @@
 @extends('layout.main')
 
 @section('header')
-    <h2 class='ui header inverted'>Suche nach "{{request('query')}}"</h2>
-    <h3 class="ui inverted header">({{count($results)}} Treffer)</h3>
+    <h2 class='ui header inverted'>Suche nach "{{$meta['query']}}"</h2>
+    <h3 class="ui inverted header">({{$meta['counter']}} Treffer)</h3>
     <script>setNav('searchicon')</script>
 @endsection
 
 @section('content')
-    @include('activity.manydetailed', ['activities' => $results])
-    @if(!count($results))
+    @foreach($results as $typename => $result)
+        <h4 class="ui horizontal divider header">{{trans_choice('model_names.'.$typename, 2)}}</h4>
+        @foreach($result as $object)
+                @include('overview.frame', ['object' => $object])
+        @endforeach
+    @endforeach
+    @if(!$meta['counter'])
         <div class="ui center aligned red segment">
             <div class="ui center aligned icon header">
                 <i class="red meh icon"></i>

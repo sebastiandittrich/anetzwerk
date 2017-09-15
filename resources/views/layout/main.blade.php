@@ -27,14 +27,14 @@
             <div class="ui blue tabular inverted vertical masthead segment">
                 <div class="ui container">
                     <div class="ui large stackable inverted secondary pointing menu" style="border-left: none; border-top: none; border-right: none;" id="menu">
-                        <a id='home' href="/" class="active item">Home</a>
-                        <a id='activities' href="/activities" class="active item">Aktivitäten</a>
-                        <a id='quotes' href="/quotes" class="item">Zitate</a>
-                        <a href="/users" id="user" class="item">Benutzer</a>
-                        <a id="searchicon" class="item"><i class="search icon"></i></a>
+                        <a id='home' href="/" class="active item"><i class="@lang('site_icons.App\\Home') icon"></i> Home</a>
+                        <a id='activities' href="/activities" class="active item"><i class="@lang('site_icons.App\\Activity') icon"></i> Aktivitäten</a>
+                        <a id='quotes' href="/quotes" class="item"><i class="@lang('site_icons.App\\Quote') icon"></i> Zitate</a>
+                        <a href="/users" id="user" class="item"><i class="@lang('site_icons.App\\User') icon"></i> Benutzer</a>
+                        <a id="searchicon" class="item"><i class="@lang('site_icons.App\\Search') icon"></i></a>
                         <div class="item" id="search" style="display:none">
                             <div class="ui icon input asearchinput">
-                                <i class="ui inverted link search icon"></i>
+                                <i class="ui inverted link @lang('site_icons.App\\Search') icon"></i>
                                 <input type="text" placeholder="Search...">
                             </div>
                         </div>
@@ -61,6 +61,7 @@
             <div class="ui vertical inverted grey stripe segment">
                 <div id="page-content" class="ui container">
                     @yield('content')
+                    @include('image.fullscreen')
                 </div>
             </div>
         </div>

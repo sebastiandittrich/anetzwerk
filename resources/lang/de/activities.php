@@ -4,6 +4,7 @@
             'create' => 'blue add',
             'update' => 'orange refresh',
             'delete' => 'red erase',
+            'share' => 'green cut'
         ],
         'App\\Post' => [
             'create' => 'hat einen Post veröffentlicht',

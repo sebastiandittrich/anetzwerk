@@ -12,6 +12,8 @@ class Post extends Model
 {
     use UniversalProperties;
     use Shittable;
+    use Commentable;
+    use Belonging;
 
     protected $fillable = ['content', 'user_id'];
     protected $whitelist = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'p', 'em', 'u', 's', 'pre', 'ol', 'li', 'ul', 'span'];
@@ -31,16 +33,6 @@ class Post extends Model
         } else {
             die(view('errors.notallowed'));
         }
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
     }
 
     public function images()

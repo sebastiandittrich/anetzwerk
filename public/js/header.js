@@ -12,11 +12,13 @@ var imagedialog = function(element, callback) {
         $('.a-chooseimage').modal('show')
     })
     $('.a-chooseimage .uploadform #files').change(function() {
+        $('.a-chooseimage .dimmer').addClass('active');
         $.ajax({url: '/images/new', type: 'POST', data: new FormData($('.a-chooseimage .uploadform')[0]), processData: false, contentType: false, success: function(response) {
             for(var i = 0; i < response.length; i++) {
                 callback(response[i][0], response[i][1])
             }
-        $('.a-chooseimage').modal('hide')
+            $('.a-chooseimage .dimmer').removeClass('active');
+            $('.a-chooseimage').modal('hide')
         }});
     })
     $('.a-chooseimage .item.upload').click(function() {
@@ -36,8 +38,24 @@ var imagedialog = function(element, callback) {
     })
 }
 
+var maximizeimage = function(image) {
+    $(image).click(function(event) {
+        if($(this).hasClass('prevent-fullscreen')) {
+            return 
+        } else {
+            event.preventDefault();
+        }
+        $('.a-fullscreen-image').find('img').attr('src', $(this).attr('src'));
+        $('.a-fullscreen-image').modal('show');
+        $('.a-fullscreen-image').find('.a-close').click(function() {
+            $('.a-fullscreen-image').modal('hide');
+        });
+    });
+}
+
 $(document).ready(function() {
     $('.ui.checkbox').checkbox();
+    maximizeimage('.image img, img.image')
 })
 
 $.fn.hasParent=function(e){

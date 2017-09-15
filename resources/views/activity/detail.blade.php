@@ -8,25 +8,9 @@
         </a>
     </div>
     @if($activity->action != 'delete')
-        @if(View::exists('activity.detailed.'.str_slug($activity->object, '-')))
-            @include('activity.detailed.'.str_slug($activity->object, '-'), ['object' => $activity->object()])
+        @if(View::exists('overview.'.str_slug($activity->object, '-')) && $activity->object() != null)
+            @include('overview.'.str_slug($activity->object, '-'), ['object' => $activity->object()])
         @endif
     @endif
-@if(Auth::check())
-    <div class="content">
-        @if(property_exists($activity->object(), 'shittable'))
-            <span data-id="{{$activity->id}}" data-object="{{$activity->object}}" class="right floated a-shit">
-                <i class="{{$activity->object()->userShits() ? '' : 'outline'}} thumbs down icon"></i>
-                <span class="counter">{{count($activity->shits())}}</span>
-            </span>  
-        @endif
-        <i class="comment <?php echo count($activity->comments()) ? '' : 'outline' ?> icon"></i><span class="counter">{{count($activity->comments())}}</span> Comments
-    </div>
-    <div class="extra content">
-        <div class="ui fluid transparent large left icon input">
-            <i class="comment outline icon"></i>
-            <input data-id="{{$activity->id}}" data-object="{{$activity->object}}" class="a-comment" type="text" placeholder="Gib deinen Senf dazu...">
-        </div>
-    </div> 
-@endif 
+    @include('overview.actionfooter', ['object' => $activity->object()])
 </div>

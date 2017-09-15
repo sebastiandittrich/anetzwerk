@@ -10,13 +10,10 @@ class Quote extends Model
     protected $fillable = ['content', 'real_author', 'fake_author', 'user_id'];
     use UniversalProperties;
     use Shittable;
+    use Commentable;
+    use Belonging;
 
     public function track(string $action) {
         Activity::store($action, self::class, $this->id);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 }

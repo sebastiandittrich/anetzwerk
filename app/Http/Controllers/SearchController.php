@@ -15,7 +15,7 @@ class SearchController extends Controller
             'content'
         ],
         'App\\Quote' => [
-            'content', 'real_author', 'real_author'
+            'content', 'real_author', 'fake_author'
         ],
         'App\\Tag' => [
             'name'
@@ -24,26 +24,31 @@ class SearchController extends Controller
     public function all() {
         $query = request('query');
         $results = [];
+        $ret = [];
         $activityresults = [];
         foreach(self::$searchable as $typename => $type) {
             foreach($type as $property) {
-                $results[$typename] = array_has($results, $typename) ? array_merge($results[$typename], ('\\'.$typename)::where($property, 'LIKE', '%' . $query . '%')->get(['id'])->toArray()):('\\'.$typename)::where($property, 'LIKE', '%' . $query . '%')->get(['id'])->toArray();
+                $results[$typename][] = ('\\'.$typename)::where($property, 'LIKE', '%' . $query . '%')->get();
             }
         }
 
-        foreach($results as $type => $typeresults) {
-            foreach($typeresults as $result) {
-                $actualresults = Activity::where('object', $type)->where('object_id', $result['id'])->get()->toArray();
-                foreach($actualresults as $singleresult) {
-                    $activityresults[] = $singleresult['id'];
+        $meta = ['query' => request('query'), 'counter' => 0];
+        $added = [];
+
+        foreach($results as $typename => $typeresults) {
+            foreach($typeresults as $resultcollection) {
+                foreach($resultcollection as $result) {
+                    if(array_has($added, $typename) && in_array($result->id, $added[$typename])) {
+                    } else {
+                        $ret[$typename][] = $result;
+                        $meta['counter']++;
+                        $added[$typename][] = $result->id;
+                    }
                 }
-                $actualresults = [];
             }
         }
-
-
-        $results = Activity::prepareMany(Activity::whereIn('id', $activityresults)->get());
+        $results = $ret;
         
-        return view('search.results', compact('results'));
+        return view('search.results', compact('results', 'meta'));
     }
 }

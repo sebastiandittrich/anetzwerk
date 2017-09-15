@@ -7,12 +7,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Shit;
 use App\Image;
 use App\Follow;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use UniversalProperties;
     use Shittable;
+    use Commentable;
 
     public function track(string $action) {
         Activity::store($action, self::class, $this->id);
@@ -36,6 +38,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $elements = ['images', 'posts', 'quotes'];
+
     public function authenticate($die = true)
     {
         if(auth()->id() == $this->id) {
@@ -49,6 +53,34 @@ class User extends Authenticatable
         }
     }
 
+    public static function compare_elements($a, $b) {
+        if($a->updated_at->eq($b->updated_at)) return 0;
+        return $a->updated_at->lt($b->updated_at) ? 1 : -1;
+    }
+
+    public function elements() {
+        $ret = [];
+        foreach($this->elements as $typename) {
+            foreach($this->$typename as $element) {
+                $found = DB::table('collection_element')->where('element', get_class($element))->where('element_id', $element->id)->first();
+                if($found != null) {
+                    if(Collection::find($found->collection_id)->user_id != $this->id) {
+                        $ret[] = $element;
+                    }
+                } else {
+                    $ret[] = $element;
+                }
+            }
+        }
+        foreach($this->collections as $collection) $ret[] = $collection;
+        usort($ret, ['App\User', 'compare_elements']);
+        return $ret;
+    }
+
+    public function collections() {
+        return $this->hasMany(Collection::class);
+    }
+
     public function posts() {
         return $this->hasMany(Post::class);
     }
@@ -58,29 +90,13 @@ class User extends Authenticatable
         return $this->hasMany(Image::class);
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
     public function quotes()
     {
         return $this->hasMany(Quote::class);
     }
 
-    public function shits($object = null) {
-        if($object == null) {
-            return Shit::where('user_id', auth()->id())->get();
-        }
-        if(count(Shit::where('user_id', auth()->id())->where('object', 'App\\Activity')->where('object_id', $object->id)->get())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function activities(int $limit) {
-        return Activity::prepareMany(Activity::where('user_id', $this->id)->orderBy('updated_at', 'desc')->limit($limit)->get());
+        return Activity::where('user_id', $this->id)->orderBy('updated_at', 'desc')->limit($limit)->get();
     }
 
     public function profileimage() {
@@ -101,5 +117,13 @@ class User extends Authenticatable
             $follows[] = User::find($follow->follows);
         }
         return $follows;
+    }
+
+    public function getURL() {
+        return '/users/'.$this->id;
+    }
+
+    public function displayName() {
+        return $this->username;
     }
 }
