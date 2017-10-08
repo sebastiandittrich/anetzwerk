@@ -18,7 +18,8 @@ $(document).ready(function() {
             }
         },
         methods: {
-            continue_clicked() {
+            continue_clicked(event) {
+                event.preventDefault();
                 this.steps.username = false;
                 this.steps.password = true;
                 this.userdata.imageurl = null;
@@ -61,18 +62,4 @@ $(document).ready(function() {
             }
         }
     })
-    var activeinput = null;
-
-    $('input').focus(function() {
-        activeinput = $(this);
-    });
-
-    $('form').submit(function(event) {
-        if (activeinput != null) {
-            if (activeinput.attr('name') == 'username') {
-                event.preventDefault();
-                vue.continue_clicked();
-            }
-        }
-    });
 });

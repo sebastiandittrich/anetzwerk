@@ -25,10 +25,14 @@ var imagedialog = function(element, callback) {
         $('.a-chooseimage .uploadform #files').click()
     })
     $('.a-chooseimage .item.my').click(function() {
-        $('.a-chooseimage').find('.content.main, .content.all').hide()
+        $('.a-chooseimage').find('.content.main, .content.other').hide()
         $('.a-chooseimage').find('.content.my').show()
     })
-    $('.a-chooseimage .content.my img').click(function() {
+    $('.a-chooseimage .item.other').click(function() {
+        $('.a-chooseimage').find('.content.main, .content.my').hide()
+        $('.a-chooseimage').find('.content.other').show()
+    })
+    $('.a-chooseimage .content img').click(function() {
         $('.a-chooseimage').modal('hide')
         callback($(this).attr('data-id'), $(this).attr('src'))
     })
@@ -51,6 +55,16 @@ var maximizeimage = function(image) {
             $('.a-fullscreen-image').modal('hide');
         });
     });
+}
+
+var renderdeletemodal = function() {
+    if($('#deletemodal').attr('data-object') == "App\\Collection") {
+        $('#deletemodal .other').hide()
+        $('#deletemodal .collection').show()
+    } else {
+        $('#deletemodal .other').show()
+        $('#deletemodal .collection').hide()
+    }
 }
 
 $(document).ready(function() {

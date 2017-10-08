@@ -12,6 +12,7 @@ class Quote extends Model
     use Shittable;
     use Commentable;
     use Belonging;
+    use Deletable;
 
     public function track(string $action) {
         Activity::store($action, self::class, $this->id);

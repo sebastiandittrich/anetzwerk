@@ -10,7 +10,6 @@ $(document).ready(function() {
                 this.addedelements.find(function(element) {return element.index === index}).object = undefined
             },
             submitForm() {
-                console.log('hallo')
                 var data = {}
                 data._token = $('input[name=_token]').val()
                 data.objects = this.addedelements.filter(function(element) {

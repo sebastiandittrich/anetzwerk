@@ -52,9 +52,9 @@
                     </div>
                 </div>
                 <div id="continue-button" class="field" v-show="steps.username" @click="continue_clicked">
-                    <div class="ui fluid blue button">
+                    <button class="ui fluid blue button">
                         Weiter <i class="angle right icon"></i>
-                    </div>
+                    </button>
                 </div>
                 {{csrf_field()}}
             </form>

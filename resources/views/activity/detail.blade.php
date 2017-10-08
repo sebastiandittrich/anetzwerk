@@ -9,7 +9,7 @@
     </div>
     @if($activity->action != 'delete')
         @if(View::exists('overview.'.str_slug($activity->object, '-')) && $activity->object() != null)
-            @include('overview.'.str_slug($activity->object, '-'), ['object' => $activity->object()])
+            @include('overview.'.str_slug($activity->object, '-'), ['object' => $activity->object(), 'rootobject' => $activity])
         @endif
     @endif
     @include('overview.actionfooter', ['object' => $activity->object()])

@@ -23,10 +23,10 @@
                     <div class="description">Wähle ein Bild aus deinen bereits hochgeladenen Bildern aus</div>
                 </div>
             </a>
-            <a class="item search">
+            <a class="item other">
                 <i class="blue search icon"></i>
                 <div class="content">
-                    <div class="header">Other</div>
+                    <div class="header">Andere</div>
                     <div class="description">Durchsuche das Asoziale Netzwerk nach Bildern</div>
                 </div>
             </a>
@@ -37,10 +37,21 @@
         @foreach(Auth::user()->images as $image)
             <div class="item">
                 <div class='ui rounded tiny image'>
-                    <img data-id='{{$image->id}}' src='{{asset('storage/images/'.$image->path)}}'>
+                    <img class="prevent-fullscreen" data-id='{{$image->id}}' src='{{asset('storage/images/'.$image->path)}}'>
                 </div>
             </div>
         @endforeach
+        </div>
+    </div>
+    <div class="content other" style="display:none">
+        <div class="ui list horizontal">
+            @foreach(App\Image::all() as $image)
+                <div class="item">
+                    <div class='ui rounded tiny image'>
+                        <img class="prevent-fullscreen" data-id='{{$image->id}}' src='{{asset('storage/images/'.$image->path)}}'>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>

@@ -8,7 +8,7 @@
             <div class="ui blue tabular inverted vertical masthead segment">
                 <div class="ui center aligned container">
                     <div class="ui left aligned container">
-                        <span class='ui huge inverted header' id="pageheader"><img src="{{asset('pictures/logo-transparent.png')}}" class="ui image icon" /> Asoziales Netzwerk</span>
+                        <a href="/home" class='ui huge inverted header' id="pageheader"><img src="{{asset('pictures/logo-transparent.png')}}" class="ui image icon" /> Asoziales Netzwerk</a>
                     </div>                    
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <div class="ui container">
                     <div class="ui large stackable inverted secondary pointing menu" style="border-left: none; border-top: none; border-right: none;" id="menu">
                         <a id='home' href="/" class="active item"><i class="@lang('site_icons.App\\Home') icon"></i> Home</a>
-                        <a id='activities' href="/activities" class="active item"><i class="@lang('site_icons.App\\Activity') icon"></i> Aktivitäten</a>
+                        <a id='activities' href="/activities" class="active item"><i class="@lang('site_icons.App\\Activity') icon"></i> Feed</a>
                         <a id='quotes' href="/quotes" class="item"><i class="@lang('site_icons.App\\Quote') icon"></i> Zitate</a>
                         <a href="/users" id="user" class="item"><i class="@lang('site_icons.App\\User') icon"></i> Benutzer</a>
                         <a id="searchicon" class="item"><i class="@lang('site_icons.App\\Search') icon"></i></a>

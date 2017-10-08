@@ -21,12 +21,6 @@
         </div>
         
     </div>
-    @if(Auth::check())
-        <div class="ui message">
-            <i class="info icon"></i>
-            Eigene Aktivitäten werden ausgeblendet
-        </div>
-    @endif
     <h4 class="ui horizontal divider header">Alle Aktivitäten</h4>
     @include('activity.manydetailed')
 @endsection

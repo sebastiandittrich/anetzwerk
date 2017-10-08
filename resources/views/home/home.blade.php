@@ -62,7 +62,7 @@
 @section('content')
 @if(Auth::check())
     <h2 class="ui horizontal divider header">Neuigkeiten</h2>
-    <div class="ui centered cards">
+    <div class="ui centered cards responsive">
         <div class="ui card">
             <div class="content">
                 <div class="ui icon header"><i class="newspaper blue icon"></i>Erweiterte Posts</div>

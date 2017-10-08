@@ -6,3 +6,4 @@
         @include('activity.detail')
     @endforeach
 </div>
+@includeIf('layout.deletemodal')

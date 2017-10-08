@@ -10,4 +10,9 @@ trait Trackable
         Activity::store($action, self::class, $this->id);
         return $this;
     }
+
+    public function untrack() {
+        Activity::where('object', self::class)->where('object_id', $this->id)->delete();
+        return $this;
+    }
 }

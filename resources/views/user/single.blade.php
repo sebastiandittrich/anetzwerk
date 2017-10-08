@@ -17,6 +17,10 @@
     {{$user->username}}
 @endsection
 
+@section('header-color')
+    {{--  {{$user->color()}}  --}}
+@endsection
+
 @section('content')
     {{csrf_field()}}
 
@@ -25,7 +29,7 @@
                 <img src="{{$user->profileimage()->getURL()}}" alt="" class="ui rounded large image profile-image">
         </div>
         <div class="column">
-            @if(Auth::user())
+            @if(Auth::user() && Auth::user()->id == $user->id)
                 <div class="ui segment">
                     <h4 class="ui horizontal divider header">Aktionen</h4>
                         @if(Auth::user()->id == $user->id)
@@ -40,7 +44,7 @@
                                 </a>
                             </div>
                         @else
-                            <div class="ui blue labeled icon button"><i class="spy icon"></i>regelmäßige, rein zufällige, verdachtsunanhängige Intensivkontrollen durchführen</div>
+                            {{--  <div class="ui blue labeled icon button"><i class="spy icon"></i>regelmäßige, rein zufällige, verdachtsunanhängige Intensivkontrollen durchführen</div>  --}}
                         @endif
                 </div> 
             @endif
@@ -117,11 +121,9 @@
     </div>
     @endif
     
-    <h4 class="ui horizontal divider header">Posts von diesem Benutzer</h4>
-    @if(count($user->elements()))
-        @foreach($user->elements() as $element)
-            @include('overview.frame', ['object' => $element])
-        @endforeach
+    <h4 class="ui horizontal divider header">Feed von diesem Benutzer</h4>
+    @if(count($user->feed()))
+        @include('activity.manydetailed', ['activities' => $user->feed()])
     @else
         <div class="ui inverted red segment">
             @if($user->authenticate(false))
@@ -131,6 +133,4 @@
             @endif
         </div>
     @endif
-    
-
 @endsection

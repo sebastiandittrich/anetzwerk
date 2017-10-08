@@ -18,6 +18,23 @@ var toggleShit = function(id, object_name) {
     })
 }
 
+var deleteElement = function(object_name, object_id, callback) {
+    $.post('/ajax/deleteelement/all', {_token: $('input[name=_token]').val(), object_name: object_name, object_id: object_id}).done(function(response) {
+        if(response) {
+            callback()
+        } else {
+            alert('Etwas ist schief gelaufen.')    
+        }
+    }).fail(function() {
+        alert('Etwas ist schief gelaufen.')
+    })
+}
+
+var elementdeleted = function(element) {
+    element.remove()
+    $('#deletemodal').modal('hide')
+}
+
 var postcomment = function(object, object_id, text, callback) {
     $.ajax({
         url: '/comments/new',
@@ -44,10 +61,14 @@ var main = function() {
 
     $('.a-comment.a-close').click(function() {
         $(this).closest('.content').slideToggle('fast');
+        $(this).closest('.card').find('.show-comments.hint').toggle();
+        $(this).closest('.card').find('.hide-comments.hint').toggle();
     })
 
     $('.a-comment.a-show').click(function() {
         $(this).closest('.card').find('.content.a-comment').slideToggle('fast');
+        $(this).closest('.card').find('.show-comments.hint').toggle();
+        $(this).closest('.card').find('.hide-comments.hint').toggle();
     })
 
     $('.a-comment').keypress(function(event) {
@@ -57,6 +78,8 @@ var main = function() {
             $(self).closest('.card').find('.comments').append('<i class="notched circle loading icon"></i>')
             if(($card).find('.comments').parent().css('display') == 'none') {
                 $card.find('.comments').parent().css('display', '');
+                $(this).closest('.card').find('.show-comments.hint').toggle();
+                $(this).closest('.card').find('.hide-comments.hint').toggle();
             }
             postcomment($(this).attr('data-object'), $(this).attr('data-id'), $(this).val(), function(data) {
                 $card.find('.counter.a-comment').text(parseInt($card.find('.counter.a-comment').text()) + 1);
@@ -66,6 +89,48 @@ var main = function() {
                 $card.find('.comments').find('i').remove()
             })
         }
+    })
+
+    $('.a-delete').click(function() {
+        $('#deletemodal').attr('data-id', $(this).attr('data-id')).attr('data-object', $(this).attr('data-object'));
+        $('#deletemodal').modal('show');
+    })
+
+    $('#deletemodal').modal({
+        onApprove: function() {
+            deleteElement($(this).attr('data-object'), $(this).attr('data-id'), function() {
+                elementdeleted($('.card[data-object="'+$(this).attr('data-object')+'"][data-id="'+$(this).attr('data-id')+'"]'))
+            })  
+            return false;
+        },
+        blurring: true,
+        inverted: true,
+    })
+
+    $('#deletemodal .all').click(function() {
+        var self = this;
+        console.log('all clicked')
+        $.post('/ajax/deleteelement/all', {_token: $('input[name=_token]').val(), object_name: $('#deletemodal').attr('data-object'), object_id: $('#deletemodal').attr('data-id')}).done(function(response) {
+            if(response) {
+                elementdeleted($(self).closest('.card'))
+            } else {
+                alert('Etwas ist schief gelaufen.')    
+            }
+        }).fail(function() {
+            alert('Etwas ist schief gelaufen.')
+        })
+    })
+    $('#deletemodal .hide').click(function() {
+        var self = this;
+        $.post('/ajax/deleteelement/hide', {_token: $('input[name=_token]').val(), object_name: $('#deletemodal').attr('data-object'), object_id: $('#deletemodal').attr('data-id')}).done(function(response) {
+            if(response) {
+                elementdeleted($(self).closest('.card'))
+            } else {
+                alert('Etwas ist schief gelaufen.')    
+            }
+        }).fail(function() {
+            alert('Etwas ist schief gelaufen.')
+        })
     })
 }
 

@@ -9,7 +9,7 @@ $(document).ready(function() {
     })
     imagedialog('#changeprofileimage', function(id, url) {
         $.post('edit/profilepicture', {image_id: id, _token: $('input[name=_token]').val() }).done(function() {
-            $('#changeprofileimage').parent().append('<span class="ui green header"><i class="green checkmark icon"></i>Profilbild geändert</span>')
+            $('#changeprofileimage').parent().append('<div class="ui green header"><i class="green checkmark icon"></i>Profilbild geändert</div>')
         })
     })
 });

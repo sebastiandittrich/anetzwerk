@@ -73,6 +73,11 @@ Route::post('/images/new', 'ImagesController@store')->middleware('auth');
 Route::get('/search/all/', 'SearchController@all');
 
 // Ajax 
+Route::post('/ajax/deleteelement/{dimension}', 'AjaxController@deleteElement');
+Route::post('/ajax/isusernamefree', function() {
+    echo App\User::isUserNameFree(request('username'));
+});
+
 Route::get('/ajax/{element}', function($element) {
     return view($element);
 });

@@ -8,6 +8,9 @@ use App\Shit;
 use App\Image;
 use App\Follow;
 use Illuminate\Support\Facades\DB;
+use League\ColorExtractor\Color;
+use League\ColorExtractor\ColorExtractor;
+use League\ColorExtractor\Palette;
 
 class User extends Authenticatable
 {
@@ -53,9 +56,17 @@ class User extends Authenticatable
         }
     }
 
+    public static function isUserNameFree(string $username) {
+        return count(User::where('username', $username)->get()) > 0 ? false : true;
+    }
+
     public static function compare_elements($a, $b) {
         if($a->updated_at->eq($b->updated_at)) return 0;
         return $a->updated_at->lt($b->updated_at) ? 1 : -1;
+    }
+
+    public function color() {
+        $palette = Palette::fromFilename($this->profileimage()->getImageFullPath());
     }
 
     public function elements() {
@@ -95,12 +106,16 @@ class User extends Authenticatable
         return $this->hasMany(Quote::class);
     }
 
-    public function activities(int $limit) {
-        return Activity::where('user_id', $this->id)->orderBy('updated_at', 'desc')->limit($limit)->get();
+    public function activities(int $limit = null) {
+        return $limit != null ? Activity::where('user_id', $this->id)->orderBy('updated_at', 'desc')->limit($limit)->get() : Activity::where('user_id', $this->id)->orderBy('updated_at', 'desc')->get();
+    }
+
+    public function feed() {
+        return Activity::where('user_id', $this->id)->where('action', 'create')->orderBy('updated_at', 'desc')->get();
     }
 
     public function profileimage() {
-        return Image::find($this->image_id);
+        return Image::find($this->image_id) != null ? Image::find($this->image_id) : Image::find(1);
     }
 
     public function gofollow(User $user) {

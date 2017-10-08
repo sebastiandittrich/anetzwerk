@@ -9,7 +9,7 @@ class ActivitiesController extends Controller
 {
     public function showall()
     {
-        $activities = Activity::orderBy('created_at', 'desc')->get();
+        $activities = Activity::feed();
         return view('activity.all', compact('activities'));
     }
 

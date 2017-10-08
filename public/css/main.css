@@ -20,9 +20,24 @@ pre.ql-syntax {
     border: none !important;
 }
 
+#pagemenubuttoncontainer {
+    transition: transform 500ms;
+}
+
+#pagemenubuttoncontainer.a-hidden {
+    transform: translateY(-100%);
+}
+
 @media only screen and (max-width: 767px) {
     #menu, #search, #searchicon {
         display: none;
+    }
+
+    #pageheader {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
     }
 }
 

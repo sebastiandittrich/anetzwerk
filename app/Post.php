@@ -14,13 +14,11 @@ class Post extends Model
     use Shittable;
     use Commentable;
     use Belonging;
+    use Deletable;
+    use Trackable;
 
     protected $fillable = ['content', 'user_id'];
     protected $whitelist = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'p', 'em', 'u', 's', 'pre', 'ol', 'li', 'ul', 'span'];
-
-    public function track(string $action) {
-        Activity::store($action, self::class, $this->id);
-    }
 
     public function checkOwner(User $user = null)
     {

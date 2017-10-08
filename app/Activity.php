@@ -45,4 +45,8 @@ class Activity extends Model
             'object_id' => $id,
         ]);
     }
+
+    public static function feed() {
+        return Activity::where('user_id', "!=" , auth()->id())->where('action', 'create')->orderBy('updated_at', 'desc')->get();
+    }
 }

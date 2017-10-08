@@ -10,6 +10,8 @@ class Image extends Model
     use Shittable;
     use Commentable;
     use Belonging;
+    use Deletable;
+    use Trackable;
     protected $fillable = ['path', 'user_id'];
 
     public static $supportedExtensions = ['png', 'gif', 'jpeg', 'bmp', 'xpm', 'wbmp', 'webp', 'xbm'];
@@ -59,12 +61,6 @@ class Image extends Model
         return asset('storage/images/'.$this->path);
     }
 
-    public function removeAll()
-    {
-        unlink($this->getImageFullPath());
-        Image::find($this->id)->delete();
-    }
-
     public function createThumbnail($image)
     {
         $ext = strtolower($image->getClientOriginalExtension());
@@ -91,5 +87,11 @@ class Image extends Model
         $thumbnail = imagecreatetruecolor($newwidth, $newheight);
         imagecopyresampled($thumbnail, $loadedimage, 0, 0, 0, 0, $newwidth, $newheight, $width_orig, $height_orig);
         imagepng($thumnail, $this->getImageFullPath.".thumbnail.png");
+    }
+
+    public function deleteExtra($dimension) {
+        if($dimension == "all") {
+            unlink($this->getImageFullPath());
+        }
     }
 }
