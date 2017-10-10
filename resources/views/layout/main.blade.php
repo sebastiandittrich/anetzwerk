@@ -1,4 +1,4 @@
-<html>
+<html lang="de">
     <head>
         @include('layout.includes')
     </head>
@@ -53,7 +53,7 @@
                 </div>  
             </div>
             <div class="ui segment vertical inverted stripe blue" style="padding-top: 0px">
-                <div class="ui container">
+                <div class="ui text container">
                     @yield('header')
                 </div>
             </div>

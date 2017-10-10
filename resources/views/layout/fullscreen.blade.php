@@ -1,4 +1,4 @@
-<html>
+<html lang="de">
     <head>
         @include('layout.includes')
         <script src="http://ricostacruz.com/jquery.transit/jquery.transit.min.js"></script>

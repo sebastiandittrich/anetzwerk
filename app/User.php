@@ -111,7 +111,7 @@ class User extends Authenticatable
     }
 
     public function feed() {
-        return Activity::where('user_id', $this->id)->where('action', 'create')->orderBy('updated_at', 'desc')->get();
+        return Activity::feed($this);
     }
 
     public function profileimage() {

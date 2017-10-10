@@ -71,7 +71,7 @@ var main = function() {
         $(this).closest('.card').find('.hide-comments.hint').toggle();
     })
 
-    $('.a-comment').keypress(function(event) {
+    $('.a-comment').keyup(function(event) {
         if(event.which == 13) {
             var self = this
             var $card = $(self).closest('.card')

@@ -1,6 +1,6 @@
 @if($object != null && (property_exists($object, 'commentable') || property_exists($object, 'shittable')))
     <div class="content">
-        @if(property_exists($object, 'shittable') && Auth::user()->id != $object->user_id)
+        @if(property_exists($object, 'shittable') && Auth::check() && Auth::user()->id != $object->user_id)
             <span data-id="{{$object->id}}" data-object="{{get_class($object)}}" class="right floated a-shit">
                 <i class="{{$object->userShits() ? '' : 'outline'}} thumbs down icon"></i>
                 <span class="counter a-shit">{{count($object->shits())}}</span>
@@ -28,8 +28,8 @@
                     @include('comment.single', ['comment' => $comment])
                 @endforeach
             </div>
-            <a style="color: red" class="right floated a-close a-comment">
-                <i class="close icon"></i>Ausblenden
+            <a style="color: #3F48CC" class="right floated a-close a-comment">
+                <i class="up angle icon"></i>Ausblenden
             </a>
         </div>
     @endif

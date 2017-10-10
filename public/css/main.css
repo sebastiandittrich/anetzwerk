@@ -39,6 +39,14 @@ pre.ql-syntax {
         align-items: center;
         justify-content: center;
     }
+
+    .ui.container:not(.text) {
+        margin: 0px !important;
+    }
+
+    .ui.card, .ui.segment, img.rounded, .ui.bottom.attached.button, .ui.fluid.button, .ui.fluid.two.menu.item {
+        border-radius: 0px !important;
+    }
 }
 
 @media only screen and (min-width: 768px) {

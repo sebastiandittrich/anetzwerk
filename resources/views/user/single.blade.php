@@ -8,9 +8,7 @@
             <script>setNav('myprofile')</script>
         @endif        
     @endif
-    <script src='{{asset('js/posts.js')}}'></script>
     <script src='{{asset('js/user.js')}}'></script>
-    <script src='{{asset('js/quotes.js')}}'></script>
 @endsection
 
 @section('title')

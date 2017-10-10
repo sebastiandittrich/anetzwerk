@@ -46,7 +46,25 @@ class Activity extends Model
         ]);
     }
 
-    public static function feed() {
+    public static function reactableFilter($element) {
+        return $element != null && (property_exists($element, 'likeable') || property_exists($element, 'commentable'));
+    }
+
+    public static function oldfeed() {
         return Activity::where('user_id', "!=" , auth()->id())->where('action', 'create')->orderBy('updated_at', 'desc')->get();
+    }
+
+    public static function feed($user = null) {
+        $ids = [];
+        $activities = Activity::where('action', 'create');
+        if($user == null && auth()->check()) {
+            $activities = $activities->where('user_id', '!=', auth()->id());
+        } else if($user != null) {
+            $activities = $activities->where('user_id', $user->id);
+        }
+        foreach($activities->get() as $activity) {
+            if(self::reactablefilter($activity->object())) $ids[] = $activity->id;
+        }
+        return Activity::whereIn('id', $ids)->orderBy('updated_at', 'desc')->get();
     }
 }

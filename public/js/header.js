@@ -37,7 +37,7 @@ var imagedialog = function(element, callback) {
         callback($(this).attr('data-id'), $(this).attr('src'))
     })
     $('.a-chooseimage .a-backbutton').click(function() {
-        $('.a-chooseimage').find('.content.my, .content.all').hide()
+        $('.a-chooseimage').find('.content.my, .content.other').hide()
         $('.a-chooseimage').find('.content.main').show()
     })
 }
