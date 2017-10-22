@@ -140,7 +140,7 @@ var main = function() {
         if($(window).height() + $(window).scrollTop() >= $(document).height() - 500 && loading == false && autoload_elements.length > 0) {
             loading = true;
             $('#feed-loading').show();
-            load_content('/autoload/activity/', autoload_elements.splice(0,10), '.ui.feed', function() {
+            load_content('/autoload/activity/', autoload_elements.splice(0,10), '.ui.feed.dynamic-loading', function() {
                 $('#feed-loading').hide();
                 loading = false;
             });

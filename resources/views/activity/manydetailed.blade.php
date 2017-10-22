@@ -1,7 +1,7 @@
 <script src='{{asset('js/quotes.js')}}'></script>
 <script src='{{asset('js/posts.js')}}'></script>
 {{csrf_field()}}
-<div class="ui feed">
+<div class="ui feed dynamic-loading">
     <script>var autoload_elements = [
         @foreach($activities as $activity)
             {{$activity->id}},
