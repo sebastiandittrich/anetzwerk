@@ -32,7 +32,7 @@ var imagedialog = function(element, callback) {
         $('.a-chooseimage').find('.content.main, .content.my').hide()
         $('.a-chooseimage').find('.content.other').show()
     })
-    $('.a-chooseimage .content img').click(function() {
+    $('.a-chooseimage .content img').not('.prevent-click').click(function() {
         $('.a-chooseimage').modal('hide')
         callback($(this).attr('data-id'), $(this).attr('src'))
     })
@@ -71,6 +71,19 @@ $(document).ready(function() {
     $('.ui.checkbox').checkbox();
     maximizeimage('.image img, img.image')
 })
+
+var load_content = function(url, array, container, callback) {
+    if(array.length < 1) {
+        callback()
+    } else {
+        $.get(url + array.shift()).done(function(data) {
+            $(container).append(data)
+            load_content(url, array, container, callback)
+        }).fail(function() {
+            alert('Etwas ist schief gelaufen. Überprüfe deine Internetverbindung!')
+        })
+    }
+}
 
 $.fn.hasParent=function(e){
         return !$(this).parents(e).length

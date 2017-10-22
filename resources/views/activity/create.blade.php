@@ -32,7 +32,7 @@
             <a class="item a-image" style=""><i class="large icons"><i class="green image icon"></i><i class="corner add icon"></i></i></a>
             <a @click="addText" class="item a-text"><i class="large icons"><i class="blue left align icon"></i><i class="corner add icon"></i></i></a>
         </div>
-        <div @click="submitForm" class="ui positive huge left labeled icon button" id="submitbutton">Hochladen<i class="checkmark icon"></i></div>
+        <div @click="submitForm" class="ui positive huge left labeled icon button full-width" id="submitbutton">Hochladen<i class="checkmark icon"></i></div>
     </div>
 
     <div class="ui modal" id="additemmodal">

@@ -1,6 +1,6 @@
 <div class="ui modal a-chooseimage">
     <div class="ui dimmer">
-        <div class="ui indeterminate text loader">Bilder werden hochgeladen</div>
+        <div class="content"><div class="center"><div class="ui inverted icon header"> <img style="width: 100px; height: auto" src="{{asset('pictures/load-white.svg')}}" class="ui prevent-click icon image" width="200px">Bilder werden hochgeladen</div></div></div>
     </div>
     <form class="uploadform" style="display:none">
         {{csrf_field()}}

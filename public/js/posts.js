@@ -1,3 +1,5 @@
+var loading = false;
+
 var toggleShit = function(id, object_name) {
     $.ajax({
         url: '/shits/new',
@@ -52,9 +54,11 @@ var main = function() {
         toggleShit( $(this).attr('data-id'), $(this).attr('data-object') )
         if ($(this).find('i').hasClass('outline')) {
             $(this).find('i').removeClass('outline');
+            $(this).closest('.label').addClass('brown')
             $(this).find('.counter').text(parseInt($(this).find('.counter.a-shit').text()) + 1)
         } else {
             $(this).find('i').addClass('outline');
+            $(this).closest('.label').removeClass('brown')
             $(this).find('.counter').text(parseInt($(this).find('.counter.a-shit').text()) - 1)
         }
     })
@@ -75,7 +79,7 @@ var main = function() {
         if(event.which == 13) {
             var self = this
             var $card = $(self).closest('.card')
-            $(self).closest('.card').find('.comments').append('<i class="notched circle loading icon"></i>')
+            $(self).closest('.card').find('.comments').append('<img src="pictures/load-blue.svg" class="ui mini image load">')
             if(($card).find('.comments').parent().css('display') == 'none') {
                 $card.find('.comments').parent().css('display', '');
                 $(this).closest('.card').find('.show-comments.hint').toggle();
@@ -86,13 +90,13 @@ var main = function() {
                 $(self).val('')
                 $(self).parent().find('i').removeClass('outline')
                 $card.find('.comments').append(data)
-                $card.find('.comments').find('i').remove()
+                $card.find('.comments').find('img.load').remove()
             })
         }
     })
 
     $('.a-delete').click(function() {
-        $('#deletemodal').attr('data-id', $(this).attr('data-id')).attr('data-object', $(this).attr('data-object'));
+        $('#deletemodal').attr('data-id', $(this).attr('data-id')).attr('data-object', $(this).attr('data-object')).modal({inverted: true});
         $('#deletemodal').modal('show');
     })
 
@@ -103,7 +107,6 @@ var main = function() {
             })  
             return false;
         },
-        blurring: true,
         inverted: true,
     })
 
@@ -132,6 +135,21 @@ var main = function() {
             alert('Etwas ist schief gelaufen.')
         })
     })
+
+    $(window).scroll($.throttle( 250, function() {
+        if($(window).height() + $(window).scrollTop() >= $(document).height() - 500 && loading == false && autoload_elements.length > 0) {
+            $('#feed-loading').show();
+            load_content('/autoload/activity/', autoload_elements.splice(0,10), '.ui.feed', function() {
+                $('#feed-loading').hide();
+            });
+        }
+    }))
+
+    $(window).scroll()
+
+    // $('.a-more-infos').click(function() {
+    //     $('#moreinfomodal').modal('show')
+    // })
 }
 
 $(document).ready(main);

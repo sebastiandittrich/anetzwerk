@@ -1,10 +1,16 @@
 <div class="ui fluid centered card" style="color:black">
     <div class="content">
-        <div class="right floated meta">{{$activity->created_at->diffForHumans()}}</div>
-        <a href="/users/{{$activity->user->id}}" class="header">
-            <img src="{{$activity->user->profileimage()->getURL()}}" alt="Profile Picture" class="ui avatar image">
-            {{$activity->user->username}}
-            @lang('activities.'.$activity->object.'.'.$activity->action)
+        <a class="ui fluid list" href="/users/{{$activity->user->id}}">
+            <div class="item">
+                <img src="{{$activity->user->profileimage()->getURL()}}" alt="Profile Picture" class="ui avatar image">
+                <div class="content">
+                    <span class="header">{{$activity->user->username}}</span>
+                    <div class="description"><div class="meta">@lang('activities.'.$activity->object.'.'.$activity->action)</div></div>
+                </div>
+                <div class="right floated content">
+                    <span class="meta">{{$activity->created_at->diffForHumans()}}</span>
+                </div>
+            </div>
         </a>
     </div>
     @if($activity->action != 'delete')
@@ -13,4 +19,5 @@
         @endif
     @endif
     @include('overview.actionfooter', ['object' => $activity->object()])
+    {{--  @include('layout.moreinfomodal', ['object' => $activity->object()])  --}}
 </div>

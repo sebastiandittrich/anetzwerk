@@ -51,4 +51,9 @@ class ActivitiesController extends Controller
         }
         return "true";
     }
+
+    public function autoload(int $id) {
+        $activity = Activity::find($id);
+        return view('activity.detail', ['activity' => $activity]);
+    }
 }

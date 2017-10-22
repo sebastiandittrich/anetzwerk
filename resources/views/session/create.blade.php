@@ -14,7 +14,7 @@
     </a>
     <div style="max-width: 500px; margin: 10px !important;filter: drop-shadow(0px 0px 1px rgba(0,0,0,0.6))" :class="{changing: changing}">
         
-        <h1 class="ui inverted image header"><img class="ui image" src="{{asset('pictures/logo-transparent.png')}}" alt="">Anmelden</h1>
+        <h1 class="ui inverted image header"><img class="ui image" src="{{asset('pictures/logo-outline-white.svg')}}" alt="">Anmelden</h1>
         @include('layout.formerrors')
         <div class="ui segment">
             <div class="ui clearing container" v-if="steps.password">

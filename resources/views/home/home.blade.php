@@ -34,7 +34,7 @@
         <div class="ui vertical blue inverted stripe segment padded">
             <div class="ui center aligned container">
                 <h1 class="ui inverted icon header">
-                    <img src="{{asset('/pictures/logo-outline-white.png')}}" alt="Logo" style="height:100px;width:auto" class="ui icon image">
+                    <img src="{{asset('/pictures/logo-outline-white.svg')}}" alt="Logo" style="height:100px;width:auto" class="ui icon image">
                     Was ist das Asoziale Netzwerk?
                 </h1><br><br>
                 <p>

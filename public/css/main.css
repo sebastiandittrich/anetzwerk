@@ -40,11 +40,11 @@ pre.ql-syntax {
         justify-content: center;
     }
 
-    .ui.container:not(.text) {
+    .ui.container:not(.text):not(.not-responsive) {
         margin: 0px !important;
     }
 
-    .ui.card, .ui.segment, img.rounded, .ui.bottom.attached.button, .ui.fluid.button, .ui.fluid.two.menu.item {
+    .ui.card, .ui.segment, img.rounded, .ui.bottom.attached.button, .ui.button.full-width, .ui.fluid.two.menu.item, .ui.attached.header {
         border-radius: 0px !important;
     }
 }

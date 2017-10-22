@@ -81,3 +81,6 @@ Route::post('/ajax/isusernamefree', function() {
 Route::get('/ajax/{element}', function($element) {
     return view($element);
 });
+
+// Vue Autoload
+Route::get('/autoload/activity/{id}', 'ActivitiesController@autoload');
