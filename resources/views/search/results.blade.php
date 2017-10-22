@@ -7,12 +7,24 @@
 @endsection
 
 @section('content')
-    @foreach($results as $typename => $result)
+    @if(count($results['user']))
+        <h4 class="ui horizontal divider header">Benutzer</h4>
+        <div class="ui segment">
+            @foreach($results['user'] as $user)
+                @include('user.preview', ['user' => $user])
+            @endforeach
+        </div>
+    @endif
+    @if(count($results['activities']))
+        <h4 class="ui horizontal divider header">Aktivitäten</h4>
+        @include('activity.manydetailed', ['activities' => $results['activities']])
+    @endif
+    {{--  @foreach($results as $typename => $result)
         <h4 class="ui horizontal divider header">{{trans_choice('model_names.'.$typename, 2)}}</h4>
         @foreach($result as $object)
                 @include('overview.frame', ['object' => $object])
         @endforeach
-    @endforeach
+    @endforeach  --}}
     @if(!$meta['counter'])
         <div class="ui center aligned red segment">
             <div class="ui center aligned icon header">

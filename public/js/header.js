@@ -43,7 +43,7 @@ var imagedialog = function(element, callback) {
 }
 
 var maximizeimage = function(image) {
-    $(image).click(function(event) {
+    $(document).on('click', image ,function(event) {
         if($(this).hasClass('prevent-fullscreen')) {
             return 
         } else {
@@ -78,6 +78,8 @@ var load_content = function(url, array, container, callback) {
     } else {
         $.get(url + array.shift()).done(function(data) {
             $(container).append(data)
+            $(container).children('div:last-child').hide()
+            $(container).children('div:last-child').slideToggle('fast')
             load_content(url, array, container, callback)
         }).fail(function() {
             alert('Etwas ist schief gelaufen. Überprüfe deine Internetverbindung!')

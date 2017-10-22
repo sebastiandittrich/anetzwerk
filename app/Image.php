@@ -12,6 +12,7 @@ class Image extends Model
     use Belonging;
     use Deletable;
     use Trackable;
+    use Collectable;
     protected $fillable = ['path', 'user_id'];
 
     public static $supportedExtensions = ['png', 'gif', 'jpeg', 'bmp', 'xpm', 'wbmp', 'webp', 'xbm'];

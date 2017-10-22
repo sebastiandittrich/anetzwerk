@@ -50,7 +50,7 @@ var postcomment = function(object, object_id, text, callback) {
 }
 
 var main = function() {
-    $('.a-shit').click(function() {
+    $(document).on('click', '.a-shit', function() {
         toggleShit( $(this).attr('data-id'), $(this).attr('data-object') )
         if ($(this).find('i').hasClass('outline')) {
             $(this).find('i').removeClass('outline');
@@ -63,19 +63,19 @@ var main = function() {
         }
     })
 
-    $('.a-comment.a-close').click(function() {
+    $(document).on('click', '.a-comment.a-close', function() {
         $(this).closest('.content').slideToggle('fast');
         $(this).closest('.card').find('.show-comments.hint').toggle();
         $(this).closest('.card').find('.hide-comments.hint').toggle();
     })
 
-    $('.a-comment.a-show').click(function() {
+    $(document).on('click', '.a-comment.a-show', function() {
         $(this).closest('.card').find('.content.a-comment').slideToggle('fast');
         $(this).closest('.card').find('.show-comments.hint').toggle();
         $(this).closest('.card').find('.hide-comments.hint').toggle();
     })
 
-    $('.a-comment').keyup(function(event) {
+    $(document).on('keyup', '.a-comment', function(event) {
         if(event.which == 13) {
             var self = this
             var $card = $(self).closest('.card')
@@ -95,7 +95,7 @@ var main = function() {
         }
     })
 
-    $('.a-delete').click(function() {
+    $(document).on('click', '.a-delete', function() {
         $('#deletemodal').attr('data-id', $(this).attr('data-id')).attr('data-object', $(this).attr('data-object')).modal({inverted: true});
         $('#deletemodal').modal('show');
     })

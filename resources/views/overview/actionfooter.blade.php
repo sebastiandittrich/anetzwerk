@@ -6,6 +6,12 @@
                 <span class="counter a-shit">{{count($object->shits())}}</span>
             </span>  
         @endif
+        @if(Auth::check() && Auth::user()->id == $object->user_id)
+            <a data-id="{{$object->id}}" data-object="{{get_class($object)}}" class="right floated a-delete">
+                <i class="red close icon"></i>
+                <span style="color: red">Löschen</span>
+            </a>
+        @endif
         {{--  <a class="right floated a-more-infos">
             <i class="blue info icon"></i>
             <span style="color: blue">Mehr</span>
