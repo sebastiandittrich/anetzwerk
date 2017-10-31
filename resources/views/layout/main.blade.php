@@ -8,7 +8,7 @@
             <div class="ui blue tabular inverted vertical masthead segment">
                 <div class="ui center aligned container">
                     <div class="ui left aligned container">
-                        <a href="/home" class='ui huge inverted header' id="pageheader"><img src="{{asset('pictures/logo-outline-white.svg')}}" class="ui image icon" /> Asoziales Netzwerk</a>
+                        <a href="/home" class='ui huge inverted header' id="pageheader"><img src="{{asset('pictures/logo-transparent.png')}}" class="ui image icon" /> Asoziales Netzwerk</a>
                     </div>                    
                 </div>
             </div>
