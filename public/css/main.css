@@ -22,6 +22,7 @@ pre.ql-syntax {
 
 #pagemenubuttoncontainer {
     transition: transform 500ms;
+    filter: drop-shadow(rgba(0, 0, 0, 0.9) 0px 0px 5px);
 }
 
 #pagemenubuttoncontainer.a-hidden {
@@ -29,6 +30,10 @@ pre.ql-syntax {
 }
 
 @media only screen and (max-width: 767px) {
+    #menuparent {
+        padding-top: 0px;
+    }
+
     #menu, #search, #searchicon {
         display: none;
     }

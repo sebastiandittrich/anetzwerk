@@ -1,4 +1,4 @@
-<div class="ui list">
+<a class="ui list" href="{{$user->getURL()}}">
     <div class="item">
     <img src="{{$user->profileimage()->getURL()}}" alt="Profile Image" class="ui middle aligned avatar image">
     <div class="content">
@@ -10,4 +10,4 @@
         @endif
     </div>
     </div>
-</div>
+</a>

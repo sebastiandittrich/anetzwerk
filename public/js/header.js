@@ -66,7 +66,6 @@ var renderdeletemodal = function() {
         $('#deletemodal .collection').hide()
     }
 }
-
 $(document).ready(function() {
     $('.ui.checkbox').checkbox();
     maximizeimage('.image img, img.image')

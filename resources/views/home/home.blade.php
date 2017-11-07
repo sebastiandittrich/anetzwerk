@@ -28,7 +28,7 @@
                 <p style="color: black">
                     Registriere dich beim Asozialen Netzwerk!
                 </p>
-                <a href="/register" class="blue ui labeled icon button"><i class="sign in icon"></i>Jetzt Registrieren</a>
+                <a href="/register" class="blue ui fluent labeled icon button"><i class="sign in icon"></i>Jetzt Registrieren</a>
             </div>
         </div>
         <div class="ui vertical blue inverted stripe segment padded">
@@ -41,7 +41,7 @@
                     Weil nähmlich das System asozial ist, ist alles was sozial genannt wird eigentlich asozial, darum muss etwas wahrhaft soziales asozial genannt werden. Folglich ist ein soziales Netzwerk ein asoziales." 
                     <br>~ Das Känguru im Känguru-Manifest von Marc-Uwe Kling
                 </p><br>
-                <a href="http://www.marcuwekling.de" class="ui inverted button labeled icon"><i class="ui linux icon"></i>Webseite von Marc-Uwe-Kling</a>
+                <a href="http://www.marcuwekling.de" class="ui fluent inverted button labeled icon"><i class="ui linux icon"></i>Zur Webseite von Marc-Uwe-Kling</a>
             </div>
         </div>
         <div class="ui vertical stripe segment padded">

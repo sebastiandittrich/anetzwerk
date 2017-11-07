@@ -8,7 +8,7 @@
             <div class="ui blue tabular inverted vertical masthead segment">
                 <div class="ui center aligned container">
                     <div class="ui left aligned container">
-                        <a href="/home" class='ui huge inverted header' id="pageheader"><img src="{{asset('pictures/logo-transparent.png')}}" class="ui image icon" /> Asoziales Netzwerk</a>
+                        <a href="/home" class='ui huge inverted header' id="pageheader"><img src="{{asset('pictures/logo-transparent.png')}}" class="ui tiny image icon" /> Asoziales Netzwerk</a>
                     </div>                    
                 </div>
             </div>
@@ -16,15 +16,15 @@
                 <div class="ui container segment basic clearing" style="padding: 0px">
                     <div class="ui violet right floated button" id="pagemenubutton">
                         <i class="sidebar icon"></i>
-                        Menu
                     </div>
+                    <a href="/"><img src="{{asset('pictures/logo-transparent.png')}}" class="ui image mini icon centered left floated prevent-fullscreen" style="margin-left: 1em;"></a>
                     <div class="ui fluid icon input asearchinput">
                         <i class="ui inverted link search icon"></i>
                         <input type="text" placeholder="Search...">
                     </div>
                 </div>
             </div>
-            <div class="ui blue tabular inverted vertical masthead segment">
+            <div class="ui blue tabular inverted vertical masthead segment" id="menuparent">
                 <div class="ui container">
                     <div class="ui large stackable inverted secondary pointing menu" style="border-left: none; border-top: none; border-right: none;" id="menu">
                         <a id='home' href="/" class="active item"><i class="@lang('site_icons.App\\Home') icon"></i> Home</a>

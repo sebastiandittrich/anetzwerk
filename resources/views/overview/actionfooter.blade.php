@@ -1,10 +1,10 @@
 @if($object != null && (property_exists($object, 'commentable') || property_exists($object, 'shittable')))
     <div class="content">
         @if(property_exists($object, 'shittable') && Auth::check() && Auth::user()->id != $object->user_id)
-            <span data-id="{{$object->id}}" data-object="{{get_class($object)}}" class="ui right floated  {{$object->userShits() ? 'brown' : ''}} label a-shit">
+            <a data-id="{{$object->id}}" data-object="{{get_class($object)}}" class="ui right floated  {{$object->userShits() ? 'brown' : ''}} label a-shit">
                 <i class="{{$object->userShits() ? '' : 'outline'}} thumbs down icon"></i>
                 <span class="counter a-shit">{{count($object->shits())}}</span>
-            </span>  
+            </a>  
         @endif
         @if(Auth::check() && Auth::user()->id == $object->user_id)
             <a data-id="{{$object->id}}" data-object="{{get_class($object)}}" class="right floated a-delete">

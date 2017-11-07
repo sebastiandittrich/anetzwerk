@@ -76,18 +76,12 @@ var refreshview = function() {
 }
 
 var headermobile = function() {
-    var header = $('#pageheader').addClass('big').removeClass('huge').closest('.segment').addClass('violet').removeClass('blue')
-    header.find('img').addClass('ui image mini icon')
+    var header = $('#pageheader').closest('.masthead').hide()
     var menu = $('#menu').addClass('violet')
-    menu.css('display', 'none')
-    menu.parent().removeClass('ui container')
     $('#pagemenubuttoncontainer.sticky').sticky({onStick: function() {sticked = true;}, onUnstick: function() {sticked = false;}})
 }
 
 var headerpc = function() {
-    var header = $('#pageheader').removeClass('big').addClass('huge').closest('.segment').addClass('blue').removeClass('violet')
-    header.find('img').removeClass('ui image mini icon')
-    var menu = $('#menu').removeClass('violet')
-    menu.css('display', '')
-    menu.parent().addClass('ui container')
+    $('#pageheader').closest('.masthead').show()
+    $('#menu').removeClass('violet')
 }
