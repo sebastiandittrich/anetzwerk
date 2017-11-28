@@ -7,6 +7,16 @@ var setNavItem = function($name) {
     $('.large.pointing.menu a#' + $name).addClass('active');
 }
 
+var registerServiceWorkers = function() {
+    if(navigator.serviceWorker.controller) {
+        console.log('Active workers found, no need to register a new one.')
+    } else {
+        navigator.serviceWorker.register('/serviceworker.js', {scope: './'}).then(function() {
+            console.log('Registered new Service Worker.')
+        })
+    }
+}
+
 var imagedialog = function(element, callback) {
     $(element).click(function() {
         $('.a-chooseimage').modal('show')
@@ -69,6 +79,7 @@ var renderdeletemodal = function() {
 $(document).ready(function() {
     $('.ui.checkbox').checkbox();
     maximizeimage('.image img, img.image')
+    registerServiceWorkers()
 })
 
 var load_content = function(url, array, container, callback) {
