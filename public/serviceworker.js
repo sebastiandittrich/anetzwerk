@@ -11,7 +11,6 @@ self.addEventListener('install', function(evt) {
         evt.waitUntil(precache().then(function() {
             console.log('[ServiceWorker] Skip waiting on install');
             return self.skipWaiting();
-
         })
     );
 });

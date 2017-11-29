@@ -12,6 +12,7 @@ var registerServiceWorkers = function() {
         console.log('Active workers found, no need to register a new one.')
     } else {
         navigator.serviceWorker.register('/serviceworker.js', {scope: './'}).then(function() {
+            Notification.requestPermission()
             console.log('Registered new Service Worker.')
         })
     }
